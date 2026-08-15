@@ -67,10 +67,12 @@ six lines long, with the speaker beneath — plus tinted summary boxes.
 Without a device like this, a long essay becomes an undifferentiated
 grey slab, which is what our chapters currently are.
 
-**6. Justified, hyphenated text.** All three justify. The v2 output was
-ragged-right with no hyphenation, which is the default in every word
-processor and therefore the thing that most reliably signals "not
-typeset".
+**6. Justified, hyphenated text.** ~~All three justify.~~ **Corrected
+2026-08-16:** only CRI justifies. MI and PCI are both ragged right, and
+both are set in a sans. See principle 7 in
+`docs/report-design-principles.md` — the real rule is that justification
+needs a serif, hyphenation and a decent measure, and that what signals
+"not typeset" is justified-without-hyphenation, not raggedness itself.
 
 ## What the designer reference does that's worth keeping
 
