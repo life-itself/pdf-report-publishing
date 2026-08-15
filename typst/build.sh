@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 # Build the Typst pipeline: cleaned Markdown -> figures -> Typst -> PDF.
 #
-# Usage:  ./build.sh [style]
-#   style  one of the presets in theme.typ (warm | editorial | modern |
-#          display). Defaults to whatever main.typ specifies.
+# Usage:  ./build.sh [engine]
+#   essay  (default)  the Essay style — typst/lib/styles/essay.typ
+#                     -> output/what-is-2r.pdf
+#   v3                the superseded single-template engine, typst/report.typ
+#                     -> output/what-is-2r-typst.pdf
+#                     Kept until the Essay build is signed off; see NEXT.md.
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -16,16 +19,43 @@ export PATH="$PATH:$HOME/tools/typst-x86_64-unknown-linux-musl:$HOME/tools/pando
 # fell back to a system serif on one machine and Liberation Sans on
 # another, producing two different-looking PDFs from the same source.
 FONT_DIR="$(cd ../fonts && pwd)"
+ROOT="$(cd .. && pwd)"
 
 SRC="../source/what-is-2r.md"
-STYLE="${1:-}"
+ENGINE="${1:-essay}"
+
+case "$ENGINE" in
+  essay)
+    MAIN="essay-main.typ"
+    OUT="../output/what-is-2r.pdf"
+    # An `include`d file gets its own scope, so the generated content has to
+    # import the devices it calls. The Essay style has no margin rail and so
+    # no note(); the generator scripts never emit one.
+    IMPORTS='#import "lib/styles/essay.typ": fig, figrow, blockquote, dfn, standfirst, pullquote, opening'
+    # image() resolves relative to the file that calls it, which for the
+    # style libraries is typst/lib/styles/ — so asset paths have to be
+    # root-absolute and the compile needs --root.
+    ASSET_PREFIX="/typst/assets/"
+    ;;
+  v3)
+    MAIN="main.typ"
+    OUT="../output/what-is-2r-typst.pdf"
+    IMPORTS='#import "report.typ": fig, figrow, note, pullquote, blockquote, dfn, standfirst'
+    ASSET_PREFIX="assets/"
+    ;;
+  *)
+    echo "unknown engine: $ENGINE (expected 'essay' or 'v3')" >&2
+    exit 1
+    ;;
+esac
 
 mkdir -p build
 
-# Two structural passes over the Markdown before Pandoc sees it, each
-# recovering something the Google Docs export lost: an image's caption,
-# and a quotation's identity as a quotation. Both are cases where the
-# author's intent is visible in the source but not in its markup.
+# Three structural passes over the Markdown before Pandoc sees it, each
+# recovering something the Google Docs export lost: an image's caption, a
+# quotation's identity as a quotation, and a definition list's structure.
+# All three are cases where the author's intent is visible in the source but
+# not in its markup.
 echo "==> figures: bare markdown images -> captioned figures"
 python3 ../scripts/figures.py "$SRC" build/with-figures.md
 
@@ -38,27 +68,34 @@ python3 ../scripts/definitions.py build/with-quotes.md build/prepared.md
 echo "==> pandoc: markdown -> typst content"
 pandoc build/prepared.md -t typst -o content.typ --wrap=preserve
 
-# content.typ is `include`d, and Typst gives an included file its own scope,
-# so the figure helpers have to be imported there rather than inherited
-# from main.typ. Any bare image Pandoc still emits gets a sane width.
-python3 - <<'PY'
-import re
+echo "==> fixups: imports, asset paths, bare images"
+IMPORTS="$IMPORTS" ASSET_PREFIX="$ASSET_PREFIX" python3 - <<'PY'
+import os, re
+
 with open("content.typ") as f:
     text = f.read()
+
+# Pandoc emits bare images for anything figures.py didn't claim; give them a
+# sane width rather than letting them stretch to the column.
 text = re.sub(r'image\("([^"]+)"\)', r'image("\1", width: 100%)', text)
-header = '#import "report.typ": fig, figrow, note, pullquote, blockquote, dfn, standfirst\n\n'
+
+# Rewrite asset paths for the engine being built. The generator scripts emit
+# "assets/x.png" because that is where the v3 engine resolves from; the style
+# libraries live a directory deeper and need root-absolute paths.
+prefix = os.environ["ASSET_PREFIX"]
+if prefix != "assets/":
+    text = re.sub(r'"(?:\.\./)?assets/', '"' + prefix, text)
+
 with open("content.typ", "w") as f:
-    f.write(header + text)
+    f.write(os.environ["IMPORTS"] + "\n\n" + text)
 PY
 
 mkdir -p assets
 cp -f ../source/assets/*.png assets/
 cp -f ../source/brand/*.png assets/
 
-echo "==> typst compile"
+echo "==> typst compile ($ENGINE)"
 mkdir -p ../output
-TYPST_ARGS=(--font-path "$FONT_DIR")
-if [ -n "$STYLE" ]; then TYPST_ARGS+=(--input style="$STYLE"); fi
-typst compile "${TYPST_ARGS[@]}" main.typ ../output/what-is-2r-typst.pdf
+typst compile --font-path "$FONT_DIR" --root "$ROOT" "$MAIN" "$OUT"
 
-echo "==> done: output/what-is-2r-typst.pdf"
+echo "==> done: ${OUT#../}"

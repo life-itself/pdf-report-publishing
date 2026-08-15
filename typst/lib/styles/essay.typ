@@ -40,7 +40,7 @@
 // ---- Editorial devices (spec §5) --------------------------------------
 
 // The chapter's claim, directly under the title.
-#let standfirst(body) = block(above: 1.0em, below: 2.2em, {
+#let standfirst(body) = block(above: 0em, below: 2.2em, {
   set par(justify: false, leading: 0.75em, first-line-indent: 0em) // 1.45x
   set text(hyphenate: false)
   text(font: fonts.display, size: 13.5pt, fill: palette.muted-ink, style: "italic")[#body]
@@ -118,7 +118,13 @@
 // common height rather than a common width: a triptych of pictures with
 // ragged tops reads as three images that happen to be adjacent, not as one
 // figure.
-#let figrow(items, caption: none, source: none, height: 34mm) = figc(
+//
+// `ratios` is accepted and ignored: `scripts/figures.py` derives relative
+// widths from the source images' pixel dimensions, which is the right
+// thing for a width-based row and meaningless for a height-based one.
+// Silently accepting it keeps the generated content portable between the
+// styles rather than making the Pandoc step style-aware.
+#let figrow(items, caption: none, source: none, height: 34mm, ratios: none) = figc(
   {
     // One grid, two rows: images and their sub-captions must share column
     // widths, and the widths are decided by the images.
@@ -144,7 +150,7 @@
 // `above` is the opener's air: the spec asks for the body to start about a
 // third of the way down a chapter's first page, and this is where most of
 // that comes from.
-#let opening(body, caps: 4, above: 14mm) = { v(above); dropcap(
+#let opening(body, caps: 4, above: 2mm) = { v(above); dropcap(
   body,
   lines: 3,
   font: fonts.display,
@@ -199,6 +205,11 @@
     set par(justify: false, leading: 0.45em, first-line-indent: 0em) // 1.15x on 26pt
     set text(hyphenate: false)
     text(font: fonts.display, size: 26pt, weight: 500, fill: palette.ink)[#it.body]
+    // The opener's air is emitted here rather than left to whatever comes
+    // next, so a chapter that has no standfirst and no drop-capped opening
+    // — which is most of them until the editorial pass is done — still
+    // gets the gap the spec asks for.
+    v(12mm)
   }
 
   show heading.where(level: 2): it => {
@@ -260,11 +271,30 @@
   date: "",
   epigraph: none,
   colophon: none,
+  cover-image: none,
   contents: true,
   front-matter: true,
   body,
 ) = {
   set document(title: title, author: authors)
+
+  // ---- Cover -----------------------------------------------------------
+  // Bespoke full-bleed artwork with the title baked in, as on the designer
+  // reference. Not templated — see README. Page one is the cover, so the
+  // folio the rest of the document shows already counts it.
+  if cover-image != none {
+    set page(
+      width: A4.width,
+      height: A4.height,
+      margin: 0pt,
+      fill: palette.page,
+      header: none,
+      footer: none,
+    )
+    image(cover-image, width: 100%, height: 100%, fit: "cover")
+    pagebreak()
+  }
+
   set page(
     width: A4.width,
     height: A4.height,
