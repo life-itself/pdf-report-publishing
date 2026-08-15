@@ -67,6 +67,28 @@ principles, not the wrapper.
 
 Work in progress at the point this was written: step 1 only — exemplar
 pages re-rendered for structural analysis, nothing extracted yet.
+`docs/typst-cookbook.md` (step 3) exists as a stub carrying the Typst
+findings from this session; it gets filled out as the styles are built.
+
+**Which model to run which step.** Steps 1–4 are judgment work — looking
+at exemplar pages and working out *why* they read as professional, then
+turning that into principles and three coherent specs. Model quality
+compounds there: get the specs wrong and every line of Typst downstream
+implements the wrong thing, which is exactly how the first type-specimen
+went wrong (mechanically fine, conceptually wrong). **Run 1–4 on Opus, and
+end that session at "specs written and committed"** — a clean stopping
+point that survives hitting a usage limit.
+
+Step 5 is mechanical once the specs exist: grid maths, show rules, build
+scripts, all tightly constrained by the specs. **Run it on Sonnet.** Then
+come back to Opus for a final look at the generated PDFs, because judging
+them is taste again.
+
+On parallelising step 5: the three styles share one layout engine, so
+build that first, sequentially. Only after it is stable are the styles
+independent enough to be worth farming out to subagents, and even then the
+coordination cost is real for three files — sequential Sonnet is the
+default, subagents the optimisation.
 
 ## Superseded: the preset question
 
