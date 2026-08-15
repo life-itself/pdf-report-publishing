@@ -18,6 +18,7 @@ The sequencing agreed on 2026-08-16 is done end to end.
 | `typst/lib/styles/*.typ` | Each spec implemented |
 | `output/style-review.pdf` `style-essay.pdf` `style-brief.pdf` | One example per style, from real content |
 | `output/style-comparison.pdf` | Same content, all three styles, real furniture on every page |
+| `output/what-is-2r.pdf` | **The full 2R essay, 41pp, set in the Essay style** — `typst/build.sh` |
 | `skills/pdf-report/SKILL.md` | The wrapper: choose, read, build, edit |
 
 Rebuild everything with `typst/build-examples.sh`.
@@ -31,23 +32,23 @@ Rebuild everything with `typst/build-examples.sh`.
    - Essay's vermilion (`#B4472A`) on warm paper `#FCFAF6` — this is the
      "warm and serious" one, and Fraunces is the Restora stand-in.
    - Brief's petrol (`#12464F`) with amber (`#C1701A`) for key figures.
-2. **Which style does the 2R essay ship in?** The Essay spec says Essay,
-   and `output/style-essay.pdf` shows three of its chapters set that way.
-   Confirming that closes the question the v3 session opened.
+2. **Sign off the essay build.** `output/what-is-2r.pdf` is the whole
+   essay in the Essay style. Two known gaps in it, both listed below: the
+   editorial devices are unused, and two Google Docs conventions still
+   render as ordinary bold paragraphs.
 3. **The editorial pass.** The largest remaining *visual* gain, and the
-   one no template work can substitute for: choosing which sentences
-   become standfirsts and pull quotes. About thirty minutes per chapter
-   with an author. `skills/pdf-report/SKILL.md` step 5 has the concrete
-   list.
+   one no template work can substitute for. There is currently **no way to
+   mark it in the Markdown** — that convention needs deciding before the
+   work can be done. Measured on this document: only 2 of 16 chapters have
+   a syntactically detectable standfirst, and there is no signal at all for
+   pull quotes, so this cannot be inferred from the source. See
+   `skills/pdf-report/SKILL.md` step 5 for what the choices are.
 
 ## Then, in rough order
 
-1. **Port the full 2R essay onto the Essay style.** `typst/main.typ`,
-   `typst/report.typ` and `typst/theme.typ` are the v3 single-template
-   engine and still build `output/what-is-2r-typst.pdf`. They are now
-   superseded by `typst/lib/styles/essay.typ` and should be retired once
-   the full essay builds through it — which needs the Pandoc step pointed
-   at the new device names.
+1. **Retire the v3 engine.** `typst/main.typ`, `typst/report.typ` and
+   `typst/theme.typ` still build `output/what-is-2r-typst.pdf` via
+   `./build.sh v3`. Delete them once the Essay build is signed off.
 2. **Remaining Google Docs conventions.** Bold-line section labels and the
    `Modern → / Postmodern → / Metamodern →` triads still render as
    ordinary bold paragraphs. See README "Known gaps" for why the remaining

@@ -52,10 +52,11 @@ Build the style artefacts:
 typst/build-examples.sh
 ```
 
-Build the full 2R essay through the v3 single-template engine:
+Build the full 2R essay:
 
 ```sh
-typst/build.sh              # still the only path that runs the Markdown pipeline
+typst/build.sh              # Essay style -> output/what-is-2r.pdf
+typst/build.sh v3           # superseded engine -> output/what-is-2r-typst.pdf
 ```
 
 `pandoc-latex/build.sh` still builds the fallback LaTeX pipeline. Both read
@@ -222,9 +223,9 @@ investment right now.
 - **Which style the 2R essay ships in**, and whether the three palettes
   are right. See "Design" above, `output/style-comparison.pdf`, and
   `NEXT.md` for the specific verdicts worth having.
-- **The full essay still builds through the superseded v3 engine**
-  (`typst/report.typ`), not through `typst/lib/styles/essay.typ`. Porting
-  it means pointing the Pandoc step at the new device names.
+- **No convention exists for marking editorial devices in the Markdown.**
+  Standfirsts and pull quotes cannot be inferred from the source — see
+  `NEXT.md`.
 - **The editorial pass has not been done** — choosing which sentences
   become standfirsts and pull quotes. This is the largest remaining visual
   gain and no template work substitutes for it.
