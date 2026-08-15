@@ -8,20 +8,22 @@ macOS — producing two visibly different PDFs from identical source. A
 report template that renders differently depending on who runs it isn't a
 template.
 
-`typst/build.sh` passes `--font-path ../fonts`, so these are the only
-fonts the build can see.
+Every build passes `--font-path fonts`, so these are the only fonts the
+build can see. Check what a font path actually exposes with
+`typst fonts --font-path fonts --ignore-system-fonts`.
 
 ## What's here
 
 | File | Family | Used for |
 |---|---|---|
-| `Spectral-*.ttf` | Spectral | body — `warm` preset |
-| `Literata*.ttf` | Literata | body — `editorial` preset |
-| `SourceSerif4*.ttf` | Source Serif 4 | body — `modern`, `display` presets |
-| `Baloo2.ttf` | Baloo 2 | headings — `warm` preset |
-| `WorkSans*.ttf` | Work Sans | headings — `editorial`; furniture in all presets |
-| `Outfit.ttf` | Outfit | headings — `modern` preset |
-| `Fraunces.ttf` | Fraunces | headings — `display` preset |
+| `SourceSerif4*.ttf` | Source Serif 4 | **Review** body and chapter titles |
+| `Literata*.ttf` | Literata | **Essay** body |
+| `Fraunces*.ttf` | Fraunces | **Essay** display — headings, standfirsts, pull quotes, drop caps |
+| `Outfit.ttf` | Outfit | **Brief** display — headings, box titles, key figures |
+| `WorkSans*.ttf` | Work Sans | **Brief** body; furniture in all three styles |
+| `DMMono-*.ttf` | DM Mono | apparatus — Review's endnotes and footer date, Brief's colophon |
+| `Spectral-*.ttf` | Spectral | v3 `warm` preset only (superseded) |
+| `Baloo2.ttf` | Baloo 2 | v3 `warm` preset only (superseded) |
 
 Most are variable fonts (`[wght]`, `[opsz,wght]` axes). Typst 0.15
 instantiates these correctly, so a single file covers the whole weight
@@ -43,5 +45,8 @@ curl -O https://raw.githubusercontent.com/google/fonts/main/ofl/<family>/<File>.
 curl -o OFL-<family>.txt https://raw.githubusercontent.com/google/fonts/main/ofl/<family>/OFL.txt
 ```
 
-then add a preset in `typst/theme.typ` and check it renders with
-`typst fonts --font-path fonts`.
+then reference it from a style in `typst/lib/styles/` and check it renders
+with `typst fonts --font-path fonts --ignore-system-fonts`. Note that
+italics are separate files — `Fraunces-Italic[SOFT,WONK,opsz,wght].ttf`
+had to be fetched alongside the roman, and a missing italic shows up as a
+synthesised slant rather than as an error.

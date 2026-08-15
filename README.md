@@ -28,36 +28,38 @@ scripts/quotes.py        italic paragraphs -> `#blockquote()` calls (see "Quotes
 scripts/definitions.py   `» **Term**` lines -> `#dfn()` calls (see "Definition lists")
 fonts/                   the seven open-licence families the template uses, vendored
                          with their OFL texts — see fonts/README.md
-typst/report.typ         layout engine: page grid, margin column, figures, devices
-typst/theme.typ          palette + the four type presets
-typst/specimen.typ       one page of real content per preset, for choosing between them
+docs/                    the design work — principles, three style specs, Typst
+                         technique. This is where the value of the repo is.
+typst/lib/util.typ       the small amount of technique the three styles share
+typst/lib/styles/*.typ   the three styles implemented
+typst/examples/*.typ     one example document per style, built from real content
+typst/compare.typ        the same content in all three styles, real furniture intact
+typst/build-examples.sh  builds all four style PDFs
+skills/pdf-report/       SKILL.md — choose a style, read its spec, build, edit
+typst/report.typ         v3 single-template layout engine (superseded, still builds
+typst/theme.typ           output/what-is-2r-typst.pdf — see NEXT.md)
 pandoc-latex/            Pandoc -> custom LaTeX template -> Tectonic -> PDF
-typst/                   Pandoc -> Typst markup -> custom Typst template -> PDF
-                         (this is the live pipeline — see "Decision" below)
-reference/               designer-what-is-2r.pdf — Rufus's target reference, a
-                         professionally typeset version of this same essay,
-                         downloaded from Drive for comparison. Not our output.
-docs/                    typography-research.md — what the exemplar reports do, and
-                         why v3 makes the choices it does
-output/                  built PDFs (both pipelines, committed so they're
-                         viewable without a local toolchain)
+reference/exemplars/     the three published reports the design is derived from
+reference/               designer-what-is-2r.pdf — Rufus's original target reference.
+                         The styles now depart from it deliberately.
+output/                  built PDFs, committed so they're viewable without a
+                         local toolchain
 ```
 
-Run `typst/build.sh` to rebuild, optionally with a type preset:
+Build the style artefacts:
 
 ```sh
-typst/build.sh              # default preset (warm)
-typst/build.sh editorial    # any of: warm | editorial | modern | display
+typst/build-examples.sh
+```
+
+Build the full 2R essay through the v3 single-template engine:
+
+```sh
+typst/build.sh              # still the only path that runs the Markdown pipeline
 ```
 
 `pandoc-latex/build.sh` still builds the fallback LaTeX pipeline. Both read
 from the same `source/what-is-2r.md`.
-
-To compare the four type presets side by side:
-
-```sh
-typst compile --font-path fonts typst/specimen.typ output/type-specimen.pdf
-```
 
 ## Decision: Typst
 
@@ -79,36 +81,37 @@ investment unless something concrete needs it.
   bundle on first run instead of needing a multi-GB TeX Live install)
 - **Typst 0.15** — native typesetting language + compiler, single binary
 
-## Design (template v3)
+## Design: three template styles
 
-No style guide exists yet (that's [#1276](https://github.com/life-itself/community/issues/1276),
-still open). v2 was matched structurally against
-`reference/designer-what-is-2r.pdf` and got the palette and page shape
-right, but read as flat. v3 is a typesetting pass informed by three other
-reports off Rufus's Are.na board — see `docs/typography-research.md` for
-what they do and why. The three changes that matter:
+The design work is documented, not just implemented. Read in this order:
 
-**1. Serif body, sans for headings and furniture.** Every exemplar that
-reads as high-class does this; v2 was sans throughout, which is a large
-part of why a long-form argument read like an overgrown slide deck. Four
-type presets live in `typst/theme.typ`; `output/type-specimen.pdf` shows
-the same real page in each. Current default is `warm` (Baloo 2 / Spectral)
-on brand-continuity grounds — Baloo 2 stands in for the reference's
-rounded geometric heading face — but `editorial` (Work Sans / Literata) is
-the better typography and `display` (Fraunces / Source Serif 4) the more
-beautiful. **This is the open question for Rufus.**
+1. **`docs/report-design-principles.md`** — ten principles extracted by
+   reading pages of three published reports
+   (`reference/exemplars/`), each claim cited to a page you can open.
+   The largest finding: **page furniture** is what separates a report from
+   a Word document, and it is almost entirely independent of typeface.
+2. **`docs/styles/README.md`** and the three specs beside it — Review,
+   Essay and Brief. Each is a full specification: grid in millimetres,
+   type scale in points, palette with a named job per colour, page
+   furniture, structural elements, setting rules, and an explicit list of
+   what would break the style.
+3. **`docs/typst-cookbook.md`** — the mechanical reference.
 
-**2. The wide left margin does work now.** A 32mm margin column carries
-figure numbers, captions, chapter numbers and folios, giving the page a
-left-hand rail. v2 inherited the reference's 5.3cm left margin and left it
-empty, which reads as a mistake rather than as generosity.
+| Style | Use it for | Character |
+|---|---|---|
+| **Review** | Evidence reports, research reviews | Serif body pushed right off a working left rail carrying sources; mono apparatus; justified |
+| **Essay** | Long-form argument, essays, book chapters | Display serif over reading serif on warm paper; standfirsts, pull quotes, drop caps, prose indents |
+| **Brief** | Position papers, policy briefs | Two sans faces, short measure, key-message boxes, footnotes, mono colophon |
 
-**3. Justified and hyphenated.** v2 was ragged-right and unhyphenated —
-the word-processor default, and the thing that most reliably signals "not
-typeset". Hyphenation is explicitly disabled on headings.
+Each has an example PDF built from real content — `output/style-*.pdf` —
+so the specs are checkable rather than asserted.
+`output/style-comparison.pdf` shows the same page of content in all three,
+rendered through each style's real template so the page furniture is
+genuine.
 
-Page grid (A4, 210mm): 18mm edge · 32mm margin column · 8mm gutter · 122mm
-text (~72 characters) · 30mm outer.
+All three are brand-independent by design: the palettes are derived from
+what the exemplars demonstrated, not from the Life Itself brand, and each
+is written so its palette can be swapped without touching the layout.
 
 ### Figures
 
@@ -217,8 +220,15 @@ investment right now.
 
 ## Known gaps / next steps
 
-- **Which type preset** — the one live design decision. See "Design"
-  above and `output/type-specimen.pdf`.
+- **Which style the 2R essay ships in**, and whether the three palettes
+  are right. See "Design" above, `output/style-comparison.pdf`, and
+  `NEXT.md` for the specific verdicts worth having.
+- **The full essay still builds through the superseded v3 engine**
+  (`typst/report.typ`), not through `typst/lib/styles/essay.typ`. Porting
+  it means pointing the Pandoc step at the new device names.
+- **The editorial pass has not been done** — choosing which sentences
+  become standfirsts and pull quotes. This is the largest remaining visual
+  gain and no template work substitutes for it.
 - **Copyright/licence line is placeholder text** — needs a real decision
   (All Rights Reserved? CC BY-SA? something else?) before this ships.
 - **Cover is bespoke, not templated** — see "Design" above. Fine for this

@@ -2,6 +2,71 @@
 
 All notable work on this prototype, dated, most recent first.
 
+## 2026-08-16 — template styles
+
+The reframe agreed at the end of the v3 session: stop iterating on one
+design, extract the exemplars' principles into documentation, and express
+them as two or three template styles written as Markdown specs and then
+implemented. The deliverable is the extracted principles; the Typst is the
+proof that they are implementable.
+
+![Review](changelog-assets/2026-08-16-style-review.png)
+![Essay](changelog-assets/2026-08-16-style-essay.png)
+![Brief](changelog-assets/2026-08-16-style-brief.png)
+
+**Researched**
+- Read ~30 pages across the three exemplar PDFs at the level of structure
+  and page furniture rather than fonts, and wrote up
+  `docs/report-design-principles.md`: ten principles, each cited to a page
+  you can open. The largest finding is that **page furniture** — masthead,
+  rail, folio, running foot, colophon — is what separates a report from a
+  Word document, and that our template had a folio and nothing else.
+- Corrected the previous session's claim that all three exemplars justify.
+  Only CRI does; the two ragged ones are the two sans ones. The real rule
+  is that justification needs a serif, hyphenation and a decent measure.
+
+**Added**
+- `docs/styles/{review,essay,brief}.md` — three full specifications: grid
+  in millimetres, type scale in points, palette with a named job per
+  colour, page furniture, structural elements, setting rules, and an
+  explicit list of what would break each style.
+- `typst/lib/styles/{review,essay,brief}.typ` — each spec implemented, and
+  `typst/lib/util.typ` for the small amount of genuinely shared technique.
+- One example PDF per style, each built from **real content**: the
+  exemplar research (Review), three chapters of the 2R essay (Essay), and
+  the actual recommendation coming out of this project (Brief). A specimen
+  made of placeholder text proves nothing about how a style handles
+  argument, citation and apparatus.
+- A real drop cap, built by measuring a capital's cap-height and
+  binary-searching how many words fit beside it — Typst has no
+  text-wrap-around-shape.
+- `docs/typst-cookbook.md` filled out from a stub into a working
+  reference, including measured leading-to-line-height constants per
+  vendored family.
+- `skills/pdf-report/SKILL.md` — the wrapper: choose a style, read its
+  spec, build, then do the editorial pass.
+- Vendored Fraunces Italic and DM Mono (both OFL).
+
+**Fixed**
+- The type specimen, on both counts. `typst/specimen.typ` varied only the
+  fonts across its four pages — asking for a judgement about a design
+  while holding colour, furniture and layout fixed — and it drew its own
+  preset label into the page footer, overriding the real footer and making
+  the page furniture invisible. Replaced by `typst/compare.typ`, which
+  renders the same content through each style's real `report()` function
+  so every page carries its genuine furniture, and puts each style's name
+  on its own page in that style's own palette and display face.
+
+**Decided**
+- Three styles, not one. The three document types have incompatible
+  requirements — a review needs a source rail, an essay needs the fewest
+  devices and the most air, a brief needs boxes and footnotes — and a
+  single template serving all three would be a template that had not
+  decided what it was.
+- Palette and type are chosen per style and are brand-independent, derived
+  from what each exemplar demonstrated rather than from the Life Itself
+  brand. The inherited brown ink is gone.
+
 ## 2026-08-16
 
 Template v3 — a typesetting pass, per `NEXT.md`. The plumbing was already
