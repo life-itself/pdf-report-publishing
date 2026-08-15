@@ -25,6 +25,7 @@ scripts/clean.py        Google-Docs-export -> clean Markdown: strips the manual 
 scripts/figures.py       bare Markdown images -> numbered, captioned `#fig()` /
                          `#figrow()` calls (see "Figures" below)
 scripts/quotes.py        italic paragraphs -> `#blockquote()` calls (see "Quotes")
+scripts/definitions.py   `» **Term**` lines -> `#dfn()` calls (see "Definition lists")
 fonts/                   the seven open-licence families the template uses, vendored
                          with their OFL texts — see fonts/README.md
 typst/report.typ         layout engine: page grid, margin column, figures, devices
@@ -130,6 +131,14 @@ and v2 rendered them as several hundred words of rose italic. They now set
 as block quotations: roman, one step down from body size, with a hung
 quotation mark in the margin and the attribution in the furniture sans.
 
+### Definition lists
+
+`scripts/definitions.py` recovers the six principles in chapter 11, typed
+in the export as `» **Term**` with the description on the next line. They
+now set as definition items — a gold marker hung in the gutter, the term
+in the furniture sans, the gloss justified beneath — instead of six
+bold-then-text lumps with a stray `»` still in them.
+
 ### Devices not yet used
 
 `pullquote()`, `standfirst()` and `note()` exist in `typst/report.typ` but
@@ -218,13 +227,13 @@ investment right now.
   simpler generated-cover fallback style for reports without bespoke art.
 - **Some Google Docs conventions are still un-recovered.** Section labels
   typed as bold lines (`**Features**`, `**Relationship with truth**`) are
-  really headings; the `» **Term**` + description items in chapter 11 are
-  really a definition list; the `Modern → … / Postmodern → … /
-  Metamodern → …` triads are really a small table. All three currently
-  render as ordinary bold paragraphs. Left alone deliberately — the
-  heuristics needed to catch them also catch things that aren't them
-  (`**Sylvie:**` speaker labels, the long `**Claim: …**` standfirsts), and
-  guessing wrong is worse than leaving them plain.
+  really headings; the `Modern → … / Postmodern → … / Metamodern → …`
+  triads are really a small table. Both currently render as ordinary bold
+  paragraphs. Left alone deliberately — the heuristics needed to catch
+  them also catch things that aren't them (`**Sylvie:**` speaker labels,
+  the long `**Claim: …**` standfirsts), and guessing wrong is worse than
+  leaving them plain. The `» **Term**` definition items *were* safe to
+  convert, because that marker is unambiguous.
 - No Google Docs → Markdown step exercised yet (source was already
   Markdown) — that's the other half of the real pipeline and its own
   source of lossiness (esp. tables/footnotes/comments).

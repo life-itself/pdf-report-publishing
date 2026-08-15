@@ -217,6 +217,32 @@
   },
 )
 
+// A definition item: a named principle and its gloss.
+//
+// Chapter 11 lists six principles for the next paradigm, typed in the
+// export as `» **Term**` with the description on the next line — a
+// definition list expressed with a typed-in guillemet, which Markdown
+// sees as a bold run inside an ordinary paragraph. Rendered literally
+// they came out as six undifferentiated bold-then-text lumps with the
+// stray "»" still in them.
+#let dfn(term, body) = block(
+  above: 1.2em,
+  below: 1.2em,
+  breakable: false,
+  {
+    // The marker hangs in the gutter so the terms line up as a list
+    // without the descriptions being indented away from the text column.
+    place(left, dx: -6mm, dy: 0.30em, text(size: 7pt, fill: palette.gold)[\u{25B8}])
+    // Term and gloss are one unit, so the paragraph spacing that separates
+    // *items* must not also open up between a term and its own definition.
+    set par(spacing: 0.45em)
+    par(justify: false, text(
+      font: furniture, size: 9.5pt, weight: 600, fill: palette.maroon,
+    )[#term])
+    par(justify: true, text(size: 0.96em)[#body])
+  },
+)
+
 // A standfirst: the bolded "Claim: ..." paragraph that opens several
 // chapters of this essay. Treating it as a deck rather than just another
 // bold paragraph gives each chapter an opening beat.

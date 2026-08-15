@@ -44,6 +44,12 @@ high-class.
   rendering as body-sized rose italic (the worst-looking thing in v2).
   They now set as proper block quotations with a hung quotation mark and
   a sans attribution.
+- `scripts/definitions.py` + a `dfn()` device — chapter 11's six
+  principles were typed as `» **Term**` with the description beneath, and
+  rendered as six bold-then-text lumps with the `»` still visible. They
+  now set as a proper definition list. (Unlike the other bold-line
+  conventions in the export, this marker is unambiguous, so converting it
+  needed no guesswork — see README "Known gaps".)
 - `pullquote()`, `standfirst()` and `note()` devices, available but not
   yet used in this essay — see `NEXT.md`.
 

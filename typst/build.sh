@@ -30,7 +30,10 @@ echo "==> figures: bare markdown images -> captioned figures"
 python3 ../scripts/figures.py "$SRC" build/with-figures.md
 
 echo "==> quotes: italic paragraphs -> block quotations"
-python3 ../scripts/quotes.py build/with-figures.md build/prepared.md
+python3 ../scripts/quotes.py build/with-figures.md build/with-quotes.md
+
+echo "==> definitions: '>> **Term**' lines -> definition items"
+python3 ../scripts/definitions.py build/with-quotes.md build/prepared.md
 
 echo "==> pandoc: markdown -> typst content"
 pandoc build/prepared.md -t typst -o content.typ --wrap=preserve
@@ -43,7 +46,7 @@ import re
 with open("content.typ") as f:
     text = f.read()
 text = re.sub(r'image\("([^"]+)"\)', r'image("\1", width: 100%)', text)
-header = '#import "report.typ": fig, figrow, note, pullquote, blockquote, standfirst\n\n'
+header = '#import "report.typ": fig, figrow, note, pullquote, blockquote, dfn, standfirst\n\n'
 with open("content.typ", "w") as f:
     f.write(header + text)
 PY

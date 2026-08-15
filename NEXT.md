@@ -45,14 +45,14 @@ particular isn't worth doing until the design is settled.
    This is probably the largest remaining *visual* gain — the exemplars'
    pages breathe mainly because something interrupts the prose every few
    pages, and ours still don't.
-2. **Remaining Google Docs conventions.** Bold-line section labels,
-   the `» **Term**` definition items in chapter 11, and the
-   `Modern → / Postmodern → / Metamodern →` triads all still render as
-   ordinary bold paragraphs. See README "Known gaps" for why the
-   heuristics were left out rather than guessed at. The honest fix is
-   probably a short interactive pass — show the candidates, let a human
-   confirm the classification once, record the answers — rather than a
-   cleverer regex.
+2. **Remaining Google Docs conventions.** Bold-line section labels and the
+   `Modern → / Postmodern → / Metamodern →` triads still render as
+   ordinary bold paragraphs. (The `» **Term**` definition items were
+   unambiguous and are now converted.) See README "Known gaps" for why the
+   remaining heuristics were left out rather than guessed at. The honest
+   fix is probably a short interactive pass — show the candidates, let a
+   human confirm the classification once, record the answers — rather than
+   a cleverer regex.
 3. **Package as a skill.** Rufus's steer was
    [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides)
    as the *shape*: `SKILL.md` as workflow map, supporting reference files
