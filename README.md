@@ -1,8 +1,7 @@
 # PDF report publishing — pipeline prototype
 
 First pass at the "Markdown → elegant PDF" workflow tracked in
-[life-itself/community#1269](https://github.com/life-itself/community/issues/1269)
-and [rufuspollock/planning: 2026-pdf-report-publishing-from-markdown](https://github.com/rufuspollock/planning/blob/main/projects/2026-pdf-report-publishing-from-markdown.md).
+[life-itself/community#1269](https://github.com/life-itself/community/issues/1269).
 Not a spec — a working build to see what each toolchain actually produces.
 
 ## Sample document
