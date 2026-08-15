@@ -11,7 +11,64 @@ hyphenated text. `output/what-is-2r-typst.pdf` is the current build;
 `output/type-specimen.pdf` shows the four type presets on the same page of
 real content.
 
-## The one thing that needs Rufus
+## Direction agreed 2026-08-16 (supersedes the preset question below)
+
+Rufus reviewed `output/type-specimen.pdf` and reframed the work. The
+specimen was the wrong artefact: all four pages varied only the fonts, so
+he was being asked to judge a design while one variable moved. Worse, the
+specimen overrode the real page footer with its own preset label, so the
+page furniture — the thing he most wanted to see — was invisible.
+
+**What he actually wants:** find good exemplars, extract their principles
+clearly into documentation, and express those as **two or three template
+styles** written as Markdown specs with instructions. Then implement them
+and generate example PDFs. A `SKILL.md` is just the wrapper that says
+"read these instructions and implement" — the value is in the extracted
+principles, not the wrapper.
+
+**Verdicts on v3:**
+- Baloo 2 headings are out — "weird rounded font", unprofessional. The
+  principle: if it's a sans, use a genuinely good sans; if a serif, a
+  genuinely good serif. Don't sit between the two.
+- Outfit (specimen p3) is good; Fraunces (p4) possibly better.
+- **Restora** is his usual heading face — old-style roman serif by Nasir
+  Udin, 2019. He cannot supply the files and licensing is inconsistent
+  across the free listings, so **don't pursue it**; Fraunces is the
+  open-licence stand-in.
+- The brown ink is not liked and was never defended — it was inherited
+  from the designer reference. Palette is my judgement now.
+- CRI's running header/footer furniture is what gave its pages
+  "stylistic substance". We have none of it. Don't slavishly copy CRI.
+
+**Constraints:**
+- Reports should be **readable**, and **both warm and serious**.
+- Work **independent of Life Itself brand** — he explicitly did not want
+  the brand guessed at. Derive the options from the exemplars instead.
+- Colour and type are my judgement calls; I don't need to ask again.
+
+**Planned sequencing:**
+1. Deepen exemplar extraction — structure and page furniture, not just
+   fonts. Sources: the Are.na board PDFs (CRI *Reality Check*, Mindfulness
+   Initiative *Reconnection*, PCI *Planetary Futures*) plus good websites.
+2. `docs/report-design-principles.md` — template-independent principles.
+3. `docs/typst-cookbook.md` — generic Typst technique (page grid, margin
+   notes, figures, quotes, footnotes, furniture) that holds regardless of
+   which style is chosen.
+4. Three template style specs as Markdown, provisionally:
+   - **Review** — CRI-like: serif body, sans furniture, margin rail for
+     sources and captions, running header, data-heavy. For evidence and
+     research reports.
+   - **Essay** — literary: display serif headings, generous measure,
+     standfirsts and pull quotes. For long-form argument (the 2R essay).
+   - **Brief** — sans-forward, tighter, boxed summaries, more colour
+     blocking. For position papers and policy briefs.
+5. Implement each as a Typst style; generate one example PDF per style.
+6. Wrap as `skills/pdf-report/SKILL.md`.
+
+Work in progress at the point this was written: step 1 only — exemplar
+pages re-rendered for structural analysis, nothing extracted yet.
+
+## Superseded: the preset question
 
 **Pick a type preset.** Open `output/type-specimen.pdf` — four pages, same
 content, one preset each. Then `typst/build.sh <preset>`.
