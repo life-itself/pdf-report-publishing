@@ -189,14 +189,13 @@ directly:
   by the first version of `clean.py`. Now preserved as real `#pagebreak()`
   calls via Pandoc's raw-block passthrough.
 
-**Resolved since v2:** the reference's heading typeface is a rounded
-geometric sans (bubble-shaped terminals, distinct from the cover headline
-down through every section heading). v2 had no network access to fetch it
-and fell back to Liberation Sans Bold. **Baloo 2** is now vendored in
-`fonts/` as the open-licence stand-in and is what the default `warm`
-preset uses. It is a close read of the reference, though whether we want
-to keep matching the reference here is exactly the open question above —
-caps in a rounded extrabold is the loudest of the four presets.
+**Resolved, then dropped:** the reference's heading typeface is a rounded
+geometric sans (bubble-shaped terminals). **Baloo 2** was vendored as the
+open-licence stand-in for it and used by the v3 `warm` preset. That is no
+longer the direction — the three styles do not match the reference, and
+none of them uses Baloo 2. The principle that replaced it: if it is a
+sans, use a genuinely good sans; if a serif, a genuinely good serif; do
+not sit between the two.
 
 ## Pandoc+LaTeX vs Typst — first impressions (why Typst won)
 
