@@ -81,7 +81,9 @@ style at all**; the register is contemporary and institutional.
 | Footnote | Work Sans | 7pt | 400 | 1.35× | Number in DM Mono 6.5pt superior; URLs allowed to break anywhere |
 | Colophon | DM Mono | 7pt | 400 | 1.4× | Key/value, key column 16mm |
 
-Paragraphs separated by **0.7em**, never indented.
+Paragraphs separated by **1.4em** (Typst's `par.spacing`, the gap between
+paragraph blocks), never indented. A sans at a short measure needs a
+clearly visible paragraph break, because there is no indent doing the job.
 
 ## 3. Colour
 

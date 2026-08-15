@@ -68,8 +68,13 @@ sans. A subhead can therefore never be misread as a small chapter title.
 | Footer | DM Mono 8pt + Work Sans 8pt/600 | — | — | — | `2026.08.16 | Section Name` |
 | Endnote | DM Mono | 7.5pt | 400 | 1.5× | Hanging number in the rail-side indent |
 
-Paragraphs are separated by **0.55em of space** and are not indented,
-except the lead paragraph after a chapter title.
+Paragraphs are separated by **1.45em** (Typst's `par.spacing`, which is
+the gap between paragraph blocks, not an addition to the leading) and are
+not indented, except the lead paragraph after a chapter title. That lead
+paragraph is marked explicitly in the source with `#lead[…]` rather than
+inferred: a show rule that tracks "am I the first paragraph" needs mutable
+state read during layout, which is the kind of thing that fails to
+converge.
 
 ## 3. Colour
 
@@ -115,11 +120,14 @@ furniture is worth having.
 
 ## 5. Structural elements
 
-**Chapter opener.** Zero-padded number in the rail. Title in the body
-serif at 30pt, outdented to start at the *rail's* right edge — i.e. 8mm
-left of the text column — over as many lines as it needs. Then 40% of the
-page height of air before the lead paragraph, which carries a 2em
-first-line indent. No rule, no colour.
+**Chapter opener.** Zero-padded number in the rail, sitting *above* the
+title's first line rather than level with it — the title outdents all the
+way to the rail's right edge, so anything level with it would touch. Title
+in the body serif at 30pt, outdented to start at the rail's right edge —
+i.e. 8mm left of the text column — over as many lines as it needs. Then
+26mm of air before the lead paragraph, which carries a 2em first-line
+indent; with the 18mm above the title, that puts the body's first line
+about a third of the way down the page. No rule, no colour.
 
 **Inventory list** — the signature interruption. A run of parallel
 statements set as a list in Work Sans 9pt, indented 6mm from the text
@@ -167,6 +175,8 @@ separate paragraphs with 0.5em between.
 - Hyphenation **off** on every heading, the masthead and the footer.
 - Widow/orphan control: minimum two lines either side of a page break.
 - A chapter always starts on a new page.
+- Back matter (notes, bibliography, appendices) gets the chapter opener
+  without a number: it is not part of the argument's sequence.
 
 ## 7. What would break this style
 

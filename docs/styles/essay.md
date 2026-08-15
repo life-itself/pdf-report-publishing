@@ -72,11 +72,15 @@ thirty pages better than any of the alternatives vendored here.
 | Folio | Work Sans | 9pt | 400 | — | `muted` |
 | Footnote | Literata | 8pt | 400 | 1.4× | Hanging number |
 
-Paragraphs after the first in a section are **indented 1.2em with no space
-between** — the book convention. Paragraphs immediately after a heading,
-a quotation or a figure are not indented. This is the single strongest
-signal that a document is set as prose rather than as a report, and it is
-worth the implementation cost.
+Paragraphs after the first in a section are **indented 1.2em with 0.55em
+between** — the book convention. Paragraphs immediately after a heading, a
+quotation, a figure or the drop-capped opening are not indented, which is
+also the book convention: an indent marks a new paragraph, and the first
+paragraph after an interruption is not competing with anything above it.
+
+The indent is the single strongest signal that a document is set as prose
+rather than assembled as a report, and it is worth the implementation
+cost.
 
 ## 3. Colour
 
@@ -121,8 +125,10 @@ interior pages.
 
 **Chapter opener.** Roman numeral in `accent`, centred over the text
 column. Then the chapter title in Fraunces 26pt, ranged left. Then the
-standfirst if there is one. Then 30% of the page height of air, then the
-body opening with a three-line drop cap in `accent`. The first line after
+standfirst if there is one. Then 14mm of air — which with the numeral and
+the standfirst above it puts the body's first line about a third of the
+way down the page — then the body opening with a three-line drop cap in
+`accent`. The first line after
 the drop cap is set in small capitals (uppercase at 0.82em with +0.06em
 tracking) for its first four or five words — the classic entry into a
 chapter, and cheap to implement.
