@@ -1,77 +1,82 @@
 ---
-updated: 2026-08-15
+updated: 2026-08-16
 ---
 
 # Next
 
-State: working Typst pipeline exists, matches the reference PDF structurally (cover,
-colours, margins, headings, footer, page breaks) — but Rufus's read after seeing it is
-that it's "OK", not there yet: not well typeset, doesn't look professional/high-class,
-image layout and captions are rough on some pages. The next session should be about
-**quality of typesetting**, not pipeline plumbing — the plumbing works.
+State: template **v3**. The typesetting pass asked for on 2026-08-15 is
+done — research first (`docs/typography-research.md`), then serif body,
+working margin column, real figures, real block quotations, justified and
+hyphenated text. `output/what-is-2r-typst.pdf` is the current build;
+`output/type-specimen.pdf` shows the four type presets on the same page of
+real content.
 
-## What Rufus specifically asked for (2026-08-15 session)
+## The one thing that needs Rufus
 
-Reflecting back what was asked, not paraphrased into something smaller:
+**Pick a type preset.** Open `output/type-specimen.pdf` — four pages, same
+content, one preset each. Then `typst/build.sh <preset>`.
 
-1. **The current style isn't right.** Not a small tweak — a real pass on making it
-   "quite a lot more beautiful," "really beautiful and really high class." Possibly
-   font changes, but not only that — the overall typeset feel is off.
-2. **Do some research first.** Find genuinely good exemplars — well-typeset reports/
-   whitepapers/books worth imitating — before pushing further on this specific design.
-   Don't just keep iterating blind on one direction.
-3. **Fix image layout and captions.** Some pages look unprofessional specifically
-   because of how images are placed and captioned, separate from the type/colour
-   question.
-4. **Consider turning this into a proper reusable skill**, not a one-off template.
-   Rufus pointed at [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides)
-   as a reference shape — an Agent Skill for generating polished HTML slide decks:
-   `SKILL.md` as the entry point/workflow map, supporting reference files
-   (style presets, templates, patterns) loaded on demand rather than all at once,
-   and a "generate style previews, let the user pick, then commit" workflow rather
-   than one-shot generation. He was explicit that our case differs — we most likely
-   want **one strong template**, not a gallery of style choices — but the *shape*
-   of a skill (workflow map + on-demand reference material + repeatable output
-   quality) is the useful part to borrow.
-5. **Explicitly deferred**: he asked for this to be written down for next time, not
-   started now.
+- `warm` (Baloo 2 / Spectral) — current default. Closest to the existing
+  brand: Baloo 2 is the open-licence stand-in for the reference PDF's
+  rounded geometric heading face. Chosen as default for brand continuity,
+  not because it's the best typography of the four — ALL-CAPS in a rounded
+  extrabold is the loudest option and somewhat fights the restraint that
+  makes the exemplar reports feel expensive.
+- `editorial` (Work Sans / Literata) — closest to CRI's *Reality Check*.
+  Literata is built for long-form reading and holds up best over 30 pages.
+  **My recommendation if the report is meant to be read.**
+- `display` (Fraunces / Source Serif 4) — the most beautiful and most
+  magazine-like. Best if the report is meant to be shown.
+- `modern` (Outfit / Source Serif 4) — neutral and competent; would raise
+  no objections and excite nobody.
 
-## Proposed next session
+This is the gate on everything below: the skill-packaging question in
+particular isn't worth doing until the design is settled.
 
-1. **Exemplar research first.** Before touching the template again, gather 4-6
-   genuinely well-typeset references — could be other whitepapers/reports Rufus
-   already admires, design-focused publishers (e.g. the kind of thing on
-   Are.na — there's already a board linked from the project doc:
-   https://www.are.na/rufus-pollock/report-inspirations-for-life-itself),
-   or general editorial/book typesetting known for quality. Look at what
-   specifically makes them read as "high class": type pairing, scale/rhythm,
-   margins, how images and captions are integrated, use of colour/restraint.
-2. **Revisit fonts properly.** Current build falls back to Liberation Sans for
-   everything (system font, no net access in that sandbox session) — both body
-   and the reference's rounded-geometric heading face. Get real candidate fonts
-   in front of Rufus rather than guessing — a few pairings rendered side by side
-   on the same page of real content, not swatches.
-3. **Fix image handling**: consistent sizing/placement rules, proper caption
-   styling (currently the essay's images just float in with no caption treatment
-   at all), sensible rules for wide vs. narrow images, multi-image rows (the
-   Cimabue/Perugino/Picasso trio in `what-is-2r` is a good stress test — three
-   related images that should probably sit as a row or sequence, not three
-   separate full-width blocks).
-4. **Then decide on the skill question**: once there's a template Rufus actually
-   likes, consider packaging the workflow as a skill (`skills/pdf-report/SKILL.md`
-   or similar, following the shape above) — clean-markdown step, template,
-   build script, documented as a repeatable process rather than a one-off
-   experiment. Not worth doing before the design itself is settled.
-5. **Smaller known items** (see `README.md` "Known gaps" for full list):
-   copyright/licence line is still placeholder text and needs an actual decision;
-   footnotes/bibliography confirmed possible in Typst but not wired into the
-   template; no Google Docs → Markdown conversion step has been exercised yet
-   (source was already Markdown); print-on-demand trim size not addressed.
+## Then, in rough order
+
+1. **Editorial devices that need editorial judgement.** `pullquote()`,
+   `standfirst()` and `note()` are built and styled but unused, because
+   using them means deciding *which* sentences to lift out — a content
+   call, not a template one. The obvious candidates: the `**Claim: …**`
+   paragraphs that open several chapters are natural standfirsts, and each
+   chapter could carry one pull quote. Worth 30 minutes with Rufus or
+   Rosie picking them, after which the template renders them for free.
+   This is probably the largest remaining *visual* gain — the exemplars'
+   pages breathe mainly because something interrupts the prose every few
+   pages, and ours still don't.
+2. **Remaining Google Docs conventions.** Bold-line section labels,
+   the `» **Term**` definition items in chapter 11, and the
+   `Modern → / Postmodern → / Metamodern →` triads all still render as
+   ordinary bold paragraphs. See README "Known gaps" for why the
+   heuristics were left out rather than guessed at. The honest fix is
+   probably a short interactive pass — show the candidates, let a human
+   confirm the classification once, record the answers — rather than a
+   cleverer regex.
+3. **Package as a skill.** Rufus's steer was
+   [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides)
+   as the *shape*: `SKILL.md` as workflow map, supporting reference files
+   loaded on demand, repeatable output quality. He was explicit that we
+   want **one strong template**, not a gallery — so the "generate previews,
+   let the user pick" step is the type-preset choice above, and it happens
+   once, not per report. The pieces are now separable enough for this:
+   `scripts/` (recover structure from the export), `typst/theme.typ`
+   (design system), `typst/report.typ` (layout engine), `typst/build.sh`
+   (workflow).
+4. **Smaller known items** (full list in README "Known gaps"):
+   copyright/licence line is still placeholder text and needs a real
+   decision; footnotes/bibliography confirmed possible in Typst but not
+   wired into the template; no Google Docs → Markdown conversion step
+   exercised yet (this source was already Markdown); print-on-demand trim
+   size not addressed; the cover is bespoke rather than templated.
 
 ## Reference material
 
-- `reference/designer-what-is-2r.pdf` — the one target used so far (single
-  data point, not a research base).
-- `output/what-is-2r-typst.pdf` — current state, for comparison once new
-  exemplars are gathered.
-- `CHANGELOG.md` — what happened in the 2026-08-15 session.
+- `docs/typography-research.md` — the exemplar research and what it
+  implied. Read this before changing the design again.
+- `output/type-specimen.pdf` — the four presets, same content.
+- `output/what-is-2r-typst.pdf` — current build.
+- `reference/designer-what-is-2r.pdf` — the original target. Note that v3
+  deliberately departs from it on body type; it is no longer the thing to
+  match.
+- `CHANGELOG.md` — what happened, dated.

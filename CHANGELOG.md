@@ -2,6 +2,71 @@
 
 All notable work on this prototype, dated, most recent first.
 
+## 2026-08-16
+
+Template v3 — a typesetting pass, per `NEXT.md`. The plumbing was already
+working; this session was about why the output read as "OK" rather than
+high-class.
+
+![Figures and a multi-image row](changelog-assets/2026-08-16-figures-12.png)
+![Block quotation with hung quote mark](changelog-assets/2026-08-16-blockquote-24.png)
+
+**Researched**
+- Pulled the three actual report PDFs off Rufus's Are.na board and read
+  their fonts out with `pdffonts`: CRI *Reality Check* (Freight Text Pro +
+  Freight Sans), The Mindfulness Initiative *Reconnection* (Oxygen + ITC
+  Avant Garde), PCI *Planetary Futures* (Inter + DM Mono). Written up in
+  `docs/typography-research.md` — the short version is that the ones that
+  read as high-class all use a **serif body with the sans confined to
+  headings and furniture**, all **justify and hyphenate**, all treat
+  images as composed **figures**, and all **use the wide margin for
+  something**.
+
+**Added**
+- `fonts/` — seven open-licence families vendored with their OFL texts,
+  so the build no longer depends on what's installed on the machine. It
+  previously fell back to Liberation Sans in the original sandbox and to
+  a system serif on macOS, i.e. produced two different PDFs from the same
+  source.
+- `typst/theme.typ` — four type presets (`warm`, `editorial`, `modern`,
+  `display`), each pairing a serif body with a display face and carrying
+  its own size/leading.
+- `typst/specimen.typ` → `output/type-specimen.pdf` — the same real page
+  of the essay rendered once per preset, through the same code path the
+  report uses, so the pairing can be chosen by looking at it.
+- `scripts/figures.py` — reconstructs figures from the export's bare
+  images: captions, numbering, widths derived from the images' own pixel
+  dimensions, and a **row form** for image sequences. The
+  Cimabue/Perugino/Picasso trio now sets as one three-panel figure with
+  equal-height panels instead of three stacked full-width images.
+- `scripts/quotes.py` + a `blockquote()` device — the essay's four long
+  quotations were typed as italic paragraphs, which the template was
+  rendering as body-sized rose italic (the worst-looking thing in v2).
+  They now set as proper block quotations with a hung quotation mark and
+  a sans attribution.
+- `pullquote()`, `standfirst()` and `note()` devices, available but not
+  yet used in this essay — see `NEXT.md`.
+
+**Changed**
+- Body is now serif; the sans is used only for headings and furniture.
+- Text is justified and hyphenated (headings explicitly not hyphenated —
+  v3's first build produced "PARADIG-MATIC", which is the most obvious
+  tell of an unattended template).
+- The wide left margin became a **32mm working margin column** carrying
+  figure numbers, captions, chapter numbers and folios. Previously it was
+  5.3cm of nothing, which reads as a mistake rather than as generosity.
+- Body ink darkened `#3A2C2B` → `#2E2422`; it was washed out at serif
+  text sizes.
+- Paragraph spacing opened up; the v3 first build ran paragraphs together
+  into a single slab.
+
+**Fixed**
+- Chapter numbers rendered as `016` for chapter 16 — Typst's numbering
+  patterns treat a leading `0` as a literal character, so `display("01")`
+  prefixes rather than pads.
+- `typst/build.sh` had the original sandbox's `/home/user/tools` paths
+  hardcoded and didn't run anywhere else.
+
 ## 2026-08-15
 
 First working pass at the Markdown → PDF pipeline
