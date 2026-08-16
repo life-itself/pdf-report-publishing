@@ -1,0 +1,119 @@
+# Editorial marks for what-is-2r.md
+#
+# Applied by scripts/editorial.py. See issue #1 for why this file exists
+# and why the marks live here rather than inline in the Markdown.
+#
+#   standfirst:       promote a paragraph the author already wrote.
+#                     Verified against the source — the build fails if it
+#                     is not found.
+#   standfirst-text:  a standfirst the editor wrote, inserted after the
+#                     chapter heading. Authored, so it cannot be verified.
+#   pullquote:        a sentence lifted verbatim from the chapter. Named,
+#                     not copied — what gets typeset is the text as it
+#                     appears in the Markdown, so it cannot drift.
+#
+# ---------------------------------------------------------------------
+# HOW TO DO THE EDITORIAL PASS
+#
+# Everything below that starts with "#|" is a PROPOSAL, not a decision.
+# To accept one, delete the "#|" and the space after it. To reject it,
+# delete the line. Roughly five minutes a chapter.
+#
+# The two marks that are already active are not judgement calls: they are
+# paragraphs the authors themselves wrote as bare claims, in bold, at the
+# top of a chapter. Everything else needs a human.
+#
+# Selection constraints these proposals were generated against (also in
+# skills/pdf-report/SKILL.md step 5):
+#   - verbatim, never paraphrased
+#   - 12-30 words, one or two sentences, self-contained (no "this", "it")
+#   - a claim, not a fact or a list item
+#   - never within two paragraphs of a figure, block quote or another
+#     pull quote
+#   - roughly one per 2-3 pages, never two on a spread
+#   - never the chapter's first or last sentence, never the standfirst
+#   - no inline Markdown emphasis inside the lifted span, which would
+#     otherwise be escaped into literal asterisks
+# ---------------------------------------------------------------------
+
+
+## Introduction
+# The authors' own bolded opening claim. Not a judgement call.
+standfirst: The Second Renaissance is both a period and a movement
+
+#| pullquote: Whatever its gifts, today Modernity is exhausted. We find ourselves unable to address our current crises through the Modern logic and value systems that created them.
+
+
+## Modern Civilization: cracks in the walls
+#| standfirst-text: Our interventions are not working. Good sense suggests we interrogate the approach: if our solutions are failing, could we be misdiagnosing the problems?
+#| pullquote: It's tempting to keep plastering over each crack as best we can. But those symptoms will keep showing up, and getting worse.
+
+
+## What are the 'foundations' of civilization?
+#| standfirst-text: Among the most fundamental aspects of a built structure are the core ideas that guided its construction, and that continue to motivate the people who maintain it.
+#| pullquote: Like the fish, unaware of the water it's swimming in, we perceive 'reality' without awareness of the mental models that deliver it to our perception
+
+
+## Cultural evolution
+#| standfirst-text: Views and values do change - but usually by generational replacement rather than by anyone changing their mind.
+#| pullquote: rather than particular humans switching views, old views die out as new generations arise, influenced by different conditions
+
+
+## Evolving Cultural Paradigms
+#| standfirst-text: Cultural paradigms shift the way species evolve: long periods of stasis, punctuated by change that is gradual and then abrupt.
+#| pullquote: the ideas that will characterize the next paradigm often form before the shift itself
+
+
+## Navigating by paradigmatic features
+#| standfirst-text: Shifts in different features happen at different rates, and in different demographics - which is why several paradigms are always operating at once.
+#| pullquote: This staggered adoption gives rise to an (often uneasy) blend of paradigms operating in societies.
+
+
+## The first Renaissance and the journey to Modernity
+# The authors' own "Claim:" paragraph. Not a judgement call.
+standfirst: Claim: many cultures across the world share a dominant foundational paradigm
+
+#| pullquote: The aftermath of this decisive societal collapse was the cradle of the first Renaissance
+
+
+## Modernity
+#| standfirst-text: An evolving set of interrelated core views and values was coextensive with scientific and cultural progress throughout the modern era.
+#| pullquote: the average citizen in wealthy countries today enjoys a quality of life that even royalty couldn't have dreamed of a few centuries ago
+
+
+## Modernity and the inner world
+#| standfirst-text: Modernity came to treat the inner world as less real than the outer - with consequences that run all the way into how we organise society.
+#| pullquote: A lack of focus on inner realities has led to a paradigmatic blindness to the ways in which inner conditions shape outer systems
+
+
+## Modernity in decline
+#| standfirst-text: Enlightenment ideals, pursued to their illogical conclusion, are foundational to the cracks we now see in the walls.
+#| pullquote: Modernity brought unprecedented gifts, but each casts a long shadow.
+# A second pull quote, from section 9.2 — far enough down the chapter not
+# to share a spread with the one above.
+#| pullquote: agreement on what counts as truth has broken down - a huge epistemic shift that makes consensus very difficult
+
+
+## Towards a Second Renaissance?
+#| standfirst-text: The decline of a cultural paradigm needn't be cause for despair. Breakdown is closely related to breakthrough.
+#| pullquote: In Winter it may appear that everything is dead, but beneath the ground, life waits to re-emerge in new forms.
+
+
+## What's next - and how do we get there?
+#| standfirst-text: There are no clean switches between paradigms. Whatever comes next is already nascent around us, in its best and its more harmful aspects.
+#| pullquote: Our task as conscious ancestors of a Second Renaissance lies in sensitivity and imagination.
+
+
+## Living into a new paradigm
+#| standfirst-text: Intellectual grasp of a desirable model is not the same as cultural embodiment of views and values.
+#| pullquote: humanity tends to suffer from a knowledge-action gap: new knowledge doesn't automatically transform into new behaviour and outcomes
+
+
+## It's already happening – and you can contribute
+#| standfirst-text: Ours is a time of profound threat and insufficient long-term vision and responsibility.
+#| pullquote: History is written by those who show up, and if you feel called to show up, then your sincere participation in this inquiry is much-needed and significant.
+
+
+# Further Reading and Appendix A deliberately carry no marks: a reading
+# list and an appendix are apparatus, not argument, and interrupting
+# apparatus with a pull quote is decoration.

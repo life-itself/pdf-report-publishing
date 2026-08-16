@@ -62,14 +62,19 @@ export lost:
 
 ```sh
 python3 scripts/clean.py       # manual TOC, escaped punctuation, heading levels
+python3 scripts/editorial.py   # standfirst / pullquote marks, from a sidecar
 python3 scripts/figures.py     # bare images -> numbered, captioned figures
 python3 scripts/quotes.py      # italic paragraphs -> block quotations
 python3 scripts/definitions.py # "» **Term**" lines -> definition items
 ```
 
-Each of these is a *structural* recovery: the author's intent is visible
-in the source but not in its markup. See the README's "Known gaps" for the
-conventions that are deliberately not guessed at.
+All but one of these is a *structural* recovery: the author's intent is
+visible in the source but not in its markup. `editorial.py` is the
+exception — it *adds* a judgement the source never contained, which is why
+it reads from a sidecar rather than from the document. See step 5.
+
+See the README's "Known gaps" for the conventions that are deliberately
+not guessed at.
 
 ## Step 4 — Build
 
@@ -103,7 +108,23 @@ marginal note; Essay has the standfirst and the pull quote; Brief has the
 key-message box and the key figure. All of them require someone to decide
 *which* sentence or number gets lifted, and that is a content judgement.
 
-Budget about thirty minutes per chapter with an author. Concretely:
+**How marks are recorded.** Not inline in the Markdown — the source is
+usually a Google Docs export that gets re-exported, which wipes anything
+hand-edited into it. Marks go in a sidecar next to the source
+(`<doc>.editorial.txt`, applied by `scripts/editorial.py`) and *name* a
+sentence rather than copying it, so a pull quote is verbatim by
+construction and the build fails if the sentence moves.
+
+```
+## Chapter title
+standfirst: A paragraph the author already wrote — promoted, and verified
+standfirst-text: A standfirst you wrote — authored, so not verifiable
+pullquote: A sentence that appears verbatim in this chapter.
+```
+
+Budget about thirty minutes per chapter with an author — or propose marks
+as commented `#|` lines in the sidecar and have the author accept them by
+deleting two characters, which takes about five. Concretely:
 
 - one standfirst per chapter — often an existing `**Claim: …**` paragraph;
 - one or two pull quotes per chapter, lifted **verbatim** from the prose
@@ -111,7 +132,9 @@ Budget about thirty minutes per chapter with an author. Concretely:
 - key figures only for numbers the body text already states — the rail
   restates, it never introduces;
 - a source line on every figure. A figure without one looks unsourced even
-  when the text cites it.
+  when the text cites it;
+- never lift a span containing inline emphasis — it escapes into literal
+  asterisks in the PDF.
 
 ## Step 6 — Check it
 

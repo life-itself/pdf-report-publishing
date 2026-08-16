@@ -26,6 +26,9 @@ scripts/figures.py       bare Markdown images -> numbered, captioned `#fig()` /
                          `#figrow()` calls (see "Figures" below)
 scripts/quotes.py        italic paragraphs -> `#blockquote()` calls (see "Quotes")
 scripts/definitions.py   `» **Term**` lines -> `#dfn()` calls (see "Definition lists")
+scripts/editorial.py     applies standfirst / pullquote marks from a sidecar — the
+                         one pass that adds editorial judgement rather than
+                         recovering it (see "Editorial marks")
 fonts/                   the seven open-licence families the template uses, vendored
                          with their OFL texts — see fonts/README.md
 docs/                    the design work — principles, three style specs, Typst
@@ -143,6 +146,26 @@ now set as definition items — a gold marker hung in the gutter, the term
 in the furniture sans, the gloss justified beneath — instead of six
 bold-then-text lumps with a stray `»` still in them.
 
+### Editorial marks
+
+`scripts/editorial.py` is the odd one out among the pre-Pandoc passes: the
+others *recover* structure the export lost, this one *adds* a judgement the
+source never contained. Which sentence becomes a pull quote cannot be
+inferred — measured on this essay, only 2 of 16 chapters have a
+syntactically detectable standfirst and there is no signal at all for pull
+quotes.
+
+So marks live in a sidecar, `source/what-is-2r.editorial.txt`, and not
+inline: the source is a Google Docs export that gets re-exported, which
+wipes anything hand-edited into it. The sidecar *names* a sentence rather
+than copying it, so what gets typeset is the text as it appears in the
+Markdown — a pull quote is verbatim by construction and cannot drift from
+the body text it duplicates. A mark that no longer matches fails the build
+and names the chapter.
+
+Proposals for every chapter are in that file, commented out as `#|` lines.
+See [#1](https://github.com/life-itself/pdf-report-publishing/issues/1).
+
 ### Devices not yet used
 
 `pullquote()`, `standfirst()` and `note()` exist in `typst/report.typ` but
@@ -223,9 +246,16 @@ investment right now.
 - **Which style the 2R essay ships in**, and whether the three palettes
   are right. See "Design" above, `output/style-comparison.pdf`, and
   `NEXT.md` for the specific verdicts worth having.
-- **No convention exists for marking editorial devices in the Markdown.**
-  Standfirsts and pull quotes cannot be inferred from the source — see
-  `NEXT.md`.
+- **The editorial pass is proposed but not ratified**
+  ([#1](https://github.com/life-itself/pdf-report-publishing/issues/1)).
+  Standfirsts and pull quotes cannot be inferred from the source — only 2
+  of 16 chapters have a detectable standfirst and there is no signal at all
+  for pull quotes — so they are marked in a sidecar,
+  `source/what-is-2r.editorial.txt`. Proposals for every chapter are in
+  that file, commented out, awaiting a human.
+- **Two Google Docs conventions are still un-recovered**
+  ([#2](https://github.com/life-itself/pdf-report-publishing/issues/2)):
+  bold-line section labels and the paradigm triads.
 - **The editorial pass has not been done** — choosing which sentences
   become standfirsts and pull quotes. This is the largest remaining visual
   gain and no template work substitutes for it.

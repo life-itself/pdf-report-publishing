@@ -2,6 +2,42 @@
 
 All notable work on this prototype, dated, most recent first.
 
+## 2026-08-16 — shipping the essay
+
+**Added**
+- `typst/build.sh` now takes an engine argument and defaults to `essay`,
+  building `output/what-is-2r.pdf` — the whole 41pp essay through
+  `typst/lib/styles/essay.typ`. `./build.sh v3` still runs the superseded
+  single-template engine until this is signed off.
+- `scripts/editorial.py` and `source/what-is-2r.editorial.txt` — standfirst
+  and pull-quote marks, kept in a sidecar rather than inline because the
+  source is a Google Docs export that gets re-exported, which wipes
+  anything hand-edited into it. The sidecar *names* a sentence rather than
+  copying it, so a lifted quote is verbatim by construction and a mark that
+  no longer matches fails the build. Proposals for all 16 chapters ship
+  commented out; all 29 verified to resolve against the source.
+- Issues [#1](https://github.com/life-itself/pdf-report-publishing/issues/1)
+  (editorial pass) and
+  [#2](https://github.com/life-itself/pdf-report-publishing/issues/2)
+  (bold-line section labels, paradigm triads).
+
+**Fixed**
+- Chapter openers emitted no trailing air of their own, relying on a
+  standfirst or drop-capped opening to provide it. Fourteen of the essay's
+  sixteen chapters have neither, so their titles butted straight into the
+  body. Found by porting the real document — the three example PDFs all
+  happened to use the devices.
+- `split_chapters` missed any chapter whose heading followed a
+  `#pagebreak()` raw block with no blank line between, which is four of
+  them in this source.
+
+**Measured**
+- Only 2 of 16 chapters have a syntactically detectable standfirst, and of
+  six inline bold runs of 6+ words in the whole essay, one is a plausible
+  pull quote. The usual "the author already bolded what matters" heuristic
+  does not work here — which is why the marks are explicit rather than
+  inferred.
+
 ## 2026-08-16 — template styles
 
 The reframe agreed at the end of the v3 session: stop iterating on one

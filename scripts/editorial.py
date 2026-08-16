@@ -80,7 +80,11 @@ def read_marks(path):
     with open(path, encoding="utf-8") as f:
         for lineno, raw in enumerate(f, 1):
             line = raw.rstrip("\n")
-            if not line.strip() or line.lstrip().startswith("# "):
+            # Any `#` line that is not a `## Chapter` heading is a comment.
+            # Proposals awaiting a human decision are parked as `#|` lines,
+            # so accepting one is deleting two characters.
+            stripped = line.strip()
+            if not stripped or (stripped.startswith("#") and not stripped.startswith("## ")):
                 continue
             if line.startswith("## "):
                 # Chapter titles are matched normalised, so a mark can be
@@ -106,6 +110,10 @@ def read_marks(path):
 # ---- Document -----------------------------------------------------------
 def split_chapters(text):
     """-> [(title or None, [paragraph, ...])], preserving order."""
+    # The export puts a `#pagebreak()` raw block immediately above several
+    # chapter headings with no blank line between, which would otherwise
+    # bundle the heading into the fence's paragraph and hide the chapter.
+    text = re.sub(r"(?m)^(#[ \t]+\S)", r"\n\1", text)
     chunks = []
     title = None
     buf = []

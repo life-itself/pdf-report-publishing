@@ -22,6 +22,7 @@ FONT_DIR="$(cd ../fonts && pwd)"
 ROOT="$(cd .. && pwd)"
 
 SRC="../source/what-is-2r.md"
+MARKS="../source/what-is-2r.editorial.txt"
 ENGINE="${1:-essay}"
 
 case "$ENGINE" in
@@ -51,13 +52,19 @@ esac
 
 mkdir -p build
 
-# Three structural passes over the Markdown before Pandoc sees it, each
-# recovering something the Google Docs export lost: an image's caption, a
-# quotation's identity as a quotation, and a definition list's structure.
-# All three are cases where the author's intent is visible in the source but
-# not in its markup.
+# Four passes over the Markdown before Pandoc sees it. Three recover
+# something the Google Docs export lost — an image's caption, a quotation's
+# identity as a quotation, a definition list's structure — all cases where
+# the author's intent is visible in the source but not in its markup.
+#
+# The fourth applies editorial marks, which are *not* in the source at all
+# and cannot be inferred from it: see issue #1. It runs first, on pristine
+# paragraphs, before the other passes rewrite anything.
+echo "==> editorial: apply standfirst / pullquote marks"
+python3 ../scripts/editorial.py "$SRC" "$MARKS" build/marked.md
+
 echo "==> figures: bare markdown images -> captioned figures"
-python3 ../scripts/figures.py "$SRC" build/with-figures.md
+python3 ../scripts/figures.py build/marked.md build/with-figures.md
 
 echo "==> quotes: italic paragraphs -> block quotations"
 python3 ../scripts/quotes.py build/with-figures.md build/with-quotes.md
