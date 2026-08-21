@@ -145,4 +145,4 @@ typst/build-examples.sh     # the four style artefacts
 - `reference/exemplars/` — the three source PDFs.
 - `reference/designer-what-is-2r.pdf` — the original target. No longer the
   thing to match; the styles depart from it deliberately.
-- `CHANGELOG.md` — what happened, dated.
+- `changelog.md` — what happened, dated.

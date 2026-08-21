@@ -2,106 +2,27 @@
 
 All notable work on this prototype, dated, most recent first.
 
-## 2026-08-16 — shipping the essay
+## 2026-08-21 — Repo housekeeping
 
-**Added**
-- `typst/build.sh` now takes an engine argument and defaults to `essay`,
-  building `output/what-is-2r.pdf` — the whole 41pp essay through
-  `typst/lib/styles/essay.typ`. `./build.sh v3` still runs the superseded
-  single-template engine until this is signed off.
-- `scripts/editorial.py` and `source/what-is-2r.editorial.txt` — standfirst
-  and pull-quote marks, kept in a sidecar rather than inline because the
-  source is a Google Docs export that gets re-exported, which wipes
-  anything hand-edited into it. The sidecar *names* a sentence rather than
-  copying it, so a lifted quote is verbatim by construction and a mark that
-  no longer matches fails the build. Proposals for all 16 chapters ship
-  commented out; all 29 verified to resolve against the source.
-- Issues [#1](https://github.com/life-itself/pdf-report-publishing/issues/1)
-  (editorial pass) and
-  [#2](https://github.com/life-itself/pdf-report-publishing/issues/2)
-  (bold-line section labels, paradigm triads).
+Adopted the shared changelog convention, and restructured `NEXT.md` around who
+owns what so anyone picking the project up can tell at a glance which decisions
+are waiting on a human and which work can just be started.
 
-**Fixed**
-- Chapter openers emitted no trailing air of their own, relying on a
-  standfirst or drop-capped opening to provide it. Fourteen of the essay's
-  sixteen chapters have neither, so their titles butted straight into the
-  body. Found by porting the real document — the three example PDFs all
-  happened to use the devices.
-- `split_chapters` missed any chapter whose heading followed a
-  `#pagebreak()` raw block with no blank line between, which is four of
-  them in this source.
+## 2026-08-16 — Three report styles, and the 2R essay set in one of them
 
-**Measured**
-- Only 2 of 16 chapters have a syntactically detectable standfirst, and of
-  six inline bold runs of 6+ words in the whole essay, one is a plausible
-  pull quote. The usual "the author already bolded what matters" heuristic
-  does not work here — which is why the marks are explicit rather than
-  inferred.
+![A chapter opening of the Second Renaissance essay: roman numeral, standfirst, three-line drop cap and a pull quote](changelog/images/2026-08-16-essay-style.png)
 
-## 2026-08-16 — template styles
+Read three well-typeset published reports page by page and wrote up what makes
+them work — the finding being that page furniture, not typeface, is what
+separates a report from a Word document. Turned that into three template styles
+(Review, Essay, Brief), each specified in Markdown first and implemented in
+Typst second, with an example PDF apiece so the specs are checkable rather than
+asserted.
 
-The reframe agreed at the end of the v3 session: stop iterating on one
-design, extract the exemplars' principles into documentation, and express
-them as two or three template styles written as Markdown specs and then
-implemented. The deliverable is the extracted principles; the Typst is the
-proof that they are implementable.
-
-![Review](changelog-assets/2026-08-16-style-review.png)
-![Essay](changelog-assets/2026-08-16-style-essay.png)
-![Brief](changelog-assets/2026-08-16-style-brief.png)
-
-**Researched**
-- Read ~30 pages across the three exemplar PDFs at the level of structure
-  and page furniture rather than fonts, and wrote up
-  `docs/report-design-principles.md`: ten principles, each cited to a page
-  you can open. The largest finding is that **page furniture** — masthead,
-  rail, folio, running foot, colophon — is what separates a report from a
-  Word document, and that our template had a folio and nothing else.
-- Corrected the previous session's claim that all three exemplars justify.
-  Only CRI does; the two ragged ones are the two sans ones. The real rule
-  is that justification needs a serif, hyphenation and a decent measure.
-
-**Added**
-- `docs/styles/{review,essay,brief}.md` — three full specifications: grid
-  in millimetres, type scale in points, palette with a named job per
-  colour, page furniture, structural elements, setting rules, and an
-  explicit list of what would break each style.
-- `typst/lib/styles/{review,essay,brief}.typ` — each spec implemented, and
-  `typst/lib/util.typ` for the small amount of genuinely shared technique.
-- One example PDF per style, each built from **real content**: the
-  exemplar research (Review), three chapters of the 2R essay (Essay), and
-  the actual recommendation coming out of this project (Brief). A specimen
-  made of placeholder text proves nothing about how a style handles
-  argument, citation and apparatus.
-- A real drop cap, built by measuring a capital's cap-height and
-  binary-searching how many words fit beside it — Typst has no
-  text-wrap-around-shape.
-- `docs/typst-cookbook.md` filled out from a stub into a working
-  reference, including measured leading-to-line-height constants per
-  vendored family.
-- `skills/pdf-report/SKILL.md` — the wrapper: choose a style, read its
-  spec, build, then do the editorial pass.
-- Vendored Fraunces Italic and DM Mono (both OFL).
-
-**Fixed**
-- The type specimen, on both counts. `typst/specimen.typ` varied only the
-  fonts across its four pages — asking for a judgement about a design
-  while holding colour, furniture and layout fixed — and it drew its own
-  preset label into the page footer, overriding the real footer and making
-  the page furniture invisible. Replaced by `typst/compare.typ`, which
-  renders the same content through each style's real `report()` function
-  so every page carries its genuine furniture, and puts each style's name
-  on its own page in that style's own palette and display face.
-
-**Decided**
-- Three styles, not one. The three document types have incompatible
-  requirements — a review needs a source rail, an essay needs the fewest
-  devices and the most air, a brief needs boxes and footnotes — and a
-  single template serving all three would be a template that had not
-  decided what it was.
-- Palette and type are chosen per style and are brand-independent, derived
-  from what each exemplar demonstrated rather than from the Life Itself
-  brand. The inherited brown ink is gone.
+The "What is the Second Renaissance?" essay now builds end to end in the Essay
+style — 41 pages, cover through appendix. What it still lacks is the editorial
+pass: standfirsts and pull quotes have to be chosen by a person, so the marks
+live in a sidecar file with a proposal waiting against every chapter.
 
 ## 2026-08-16
 
@@ -109,8 +30,8 @@ Template v3 — a typesetting pass, per `NEXT.md`. The plumbing was already
 working; this session was about why the output read as "OK" rather than
 high-class.
 
-![Figures and a multi-image row](changelog-assets/2026-08-16-figures-12.png)
-![Block quotation with hung quote mark](changelog-assets/2026-08-16-blockquote-24.png)
+![Figures and a multi-image row](changelog/images/2026-08-16-figures-12.png)
+![Block quotation with hung quote mark](changelog/images/2026-08-16-blockquote-24.png)
 
 **Researched**
 - Pulled the three actual report PDFs off Rufus's Are.na board and read
@@ -181,8 +102,8 @@ First working pass at the Markdown → PDF pipeline
 using the ["What is 2R?"](https://github.com/life-itself/2rbook/blob/main/what-is-2r/essay.md)
 essay as a real test document.
 
-![Cover](changelog-assets/2026-08-15-cover.png)
-![Body page](changelog-assets/2026-08-15-body-page.png)
+![Cover](changelog/images/2026-08-15-cover.png)
+![Body page](changelog/images/2026-08-15-body-page.png)
 
 **Added**
 - Two candidate pipelines: Pandoc+LaTeX (via Tectonic) and Pandoc+Typst.
