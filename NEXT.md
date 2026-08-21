@@ -1,12 +1,120 @@
 ---
-updated: 2026-08-16
+updated: 2026-08-21
 ---
 
 # Next
 
-State: **three template styles, specified and implemented**, with one
-example PDF each built from real content, plus a working style comparison.
-The sequencing agreed on 2026-08-16 is done end to end.
+State: **three template styles, specified and implemented**, plus the full
+2R essay building through the Essay style. The build side has run out of
+things it can decide for itself — most of what is left needs a verdict.
+
+---
+
+## Start here
+
+**If you have 30 minutes** → do the editorial pass, [#1](https://github.com/life-itself/pdf-report-publishing/issues/1).
+It is the biggest remaining visual gain and the only one nobody else can
+do. Exact steps in "Yours" below.
+
+**If you want work to continue without you** → say "take #2" and Claude
+picks up [#2](https://github.com/life-itself/pdf-report-publishing/issues/2),
+which needs no input from you.
+
+**If you only want to look at something** → open
+`output/style-comparison.pdf` and say which of the three palettes is
+wrong. Everything in "Blocked" unblocks from that.
+
+---
+
+## Yours — nobody else can do these
+
+### 1. The editorial pass ([#1](https://github.com/life-itself/pdf-report-publishing/issues/1))
+
+The essay is 41 pages with no interruptions in it at all: no standfirsts,
+no pull quotes. That is why it still reads as a grey slab in places. Which
+sentence gets lifted is an editorial judgement — measured on this document,
+only 2 of 16 chapters have a detectable standfirst and there is no signal
+at all for pull quotes.
+
+The mechanism is done. All that is left is deciding.
+
+```sh
+# 1. Open the marks file. Every chapter has a proposed standfirst and
+#    one or two proposed pull quotes, parked as "#|" lines.
+$EDITOR source/what-is-2r.editorial.txt
+
+#    Accept a proposal: delete the "#| " at the start of the line.
+#    Reject it:         delete the line.
+#    Write your own:    replace the text, keeping the key.
+
+# 2. Rebuild and look.
+typst/build.sh
+```
+
+All 29 proposals are verified to resolve against the source, so anything
+you uncomment will build. A mark that stops matching fails the build and
+names the chapter.
+
+Editable straight in GitHub if that is easier than a checkout. Worth doing
+with Rosie. About five minutes a chapter.
+
+### 2. Three palette verdicts
+
+Cheap to change, expensive to argue about in the abstract. Open the PDFs
+and say which is wrong:
+
+| Style | Accent | Where to look |
+|---|---|---|
+| Review | teal `#2A6E7A` on white | `output/style-review.pdf` |
+| Essay | vermilion `#B4472A` on warm `#FCFAF6` | `output/style-essay.pdf` — the "warm and serious" one; Fraunces is the Restora stand-in |
+| Brief | petrol `#12464F` + amber `#C1701A` | `output/style-brief.pdf` |
+
+`output/style-comparison.pdf` has all three against the same content.
+
+### 3. Sign off the essay build
+
+`output/what-is-2r.pdf`, 41pp. Two known gaps in it, both tracked: no
+editorial devices (#1), and two Google Docs conventions still rendering as
+ordinary bold paragraphs (#2, visible on p.20 and p.30).
+
+Signing off unblocks deleting the v3 engine.
+
+---
+
+## Mine — no input needed, just say go
+
+### 4. Google Docs conventions ([#2](https://github.com/life-itself/pdf-report-publishing/issues/2))
+
+Bold-line section labels and the `Modern → / Postmodern → / Metamodern →`
+triads. The last thing making p.20 and p.30 look untended. Same
+sidecar-plus-verification shape as #1, not a cleverer regex — the
+heuristics that catch these also catch speaker labels and standfirsts.
+Roughly a day.
+
+---
+
+## Blocked on a decision above
+
+- **Retire the v3 engine** — needs #3. `typst/main.typ`, `typst/report.typ`
+  and `typst/theme.typ` still build `output/what-is-2r-typst.pdf` via
+  `./build.sh v3`. Delete once the Essay build is signed off.
+- **Apply palette changes** — needs #2. Each style's palette is a single
+  dict at the top of `typst/lib/styles/<style>.typ`, written so it can be
+  swapped without touching layout.
+
+---
+
+## Long tail — no owner yet
+
+- The copyright/licence line is still placeholder text and needs a real
+  decision (All Rights Reserved? CC BY-SA?).
+- Bibliography is confirmed possible in Typst but not wired into any style.
+- Print-on-demand trim size, bleed and binding gutter are not addressed;
+  all three styles are specified for A4.
+- Covers remain bespoke artwork rather than templated, which is probably
+  right but is not written down as a decision anywhere.
+
+---
 
 ## What exists now
 
@@ -22,47 +130,10 @@ The sequencing agreed on 2026-08-16 is done end to end.
 | `scripts/editorial.py` + `source/what-is-2r.editorial.txt` | Standfirst / pull-quote marks, and the proposals awaiting a human decision |
 | `skills/pdf-report/SKILL.md` | The wrapper: choose, read, build, edit |
 
-Rebuild everything with `typst/build-examples.sh`.
-
-## The next decisions are Rufus's, not the template's
-
-1. **Look at the three PDFs and say which is wrong.** Colour and type were
-   my judgement per the brief; they are cheap to change and expensive to
-   argue about in the abstract. Specifically worth a verdict:
-   - Review's teal accent (`#2A6E7A`) on white.
-   - Essay's vermilion (`#B4472A`) on warm paper `#FCFAF6` — this is the
-     "warm and serious" one, and Fraunces is the Restora stand-in.
-   - Brief's petrol (`#12464F`) with amber (`#C1701A`) for key figures.
-2. **Sign off the essay build.** `output/what-is-2r.pdf` is the whole
-   essay in the Essay style. Two known gaps in it, both listed below: the
-   editorial devices are unused, and two Google Docs conventions still
-   render as ordinary bold paragraphs.
-3. **The editorial pass — [#1](https://github.com/life-itself/pdf-report-publishing/issues/1).**
-   The largest remaining *visual* gain, and the one no template work can
-   substitute for. The mechanism is shipped: marks live in
-   `source/what-is-2r.editorial.txt` and are applied by
-   `scripts/editorial.py`. **Proposals for every chapter are already in
-   that file, commented out** — accepting one is deleting a `#| `. Two
-   marks are live already, because they are the authors' own bolded claims
-   rather than a judgement call. About five minutes a chapter.
-
-## Then, in rough order
-
-1. **Retire the v3 engine.** `typst/main.typ`, `typst/report.typ` and
-   `typst/theme.typ` still build `output/what-is-2r-typst.pdf` via
-   `./build.sh v3`. Delete them once the Essay build is signed off.
-2. **Remaining Google Docs conventions — [#2](https://github.com/life-itself/pdf-report-publishing/issues/2).**
-   Bold-line section labels and the `Modern → / Postmodern → / Metamodern →`
-   triads still render as ordinary bold paragraphs (visible on p.20 and
-   p.30 of `output/what-is-2r.pdf`). The fix is the same sidecar-plus-
-   verification shape as #1, not a cleverer regex — the heuristics that
-   catch these also catch speaker labels and standfirsts.
-3. **Smaller known items.** The copyright/licence line is still
-   placeholder text and needs a real decision. Bibliography is confirmed
-   possible in Typst but not wired into any style. Print-on-demand trim
-   size, bleed and binding gutter are not addressed; all three styles are
-   specified for A4. Covers remain bespoke artwork rather than templated,
-   which is probably right but is not written down as a decision anywhere.
+```sh
+typst/build.sh              # the essay -> output/what-is-2r.pdf
+typst/build-examples.sh     # the four style artefacts
+```
 
 ## Reference material
 
