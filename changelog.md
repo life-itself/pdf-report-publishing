@@ -10,7 +10,9 @@ are waiting on a human and which work can just be started.
 
 ## 2026-08-16 — Three report styles, and the 2R essay set in one of them
 
-![A chapter opening of the Second Renaissance essay: roman numeral, standfirst, three-line drop cap and a pull quote](changelog/images/2026-08-16-essay-style.png)
+![The three template styles side by side: Review, Essay and Brief, each shown on a real page of content](changelog/images/2026-08-16-three-styles.png)
+
+![A chapter opening in the Essay style: roman numeral, standfirst, three-line drop cap and a pull quote](changelog/images/2026-08-16-essay-style.png)
 
 Read three well-typeset published reports page by page and wrote up what makes
 them work — the finding being that page furniture, not typeface, is what
