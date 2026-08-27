@@ -1,3 +1,57 @@
+# AGENTS.md
+
+Conventions for agents working in this repo. The README is for humans and
+deliberately short — do not add to it.
+
+## Before changing any design
+
+Read `docs/report-design-principles.md`, then the spec for the style you
+are touching in `docs/styles/`. **The spec is the artefact; the Typst is
+the proof.** If they disagree, fix whichever is wrong and say which. Do not
+improvise a design decision that the specs already settle, and do not
+invent a fourth style without writing its spec first.
+
+`docs/decisions.md` records settled questions. Check it before reopening
+one.
+
+## Where things go
+
+| Kind of thing | Goes in |
+|---|---|
+| Design principles, style specs, Typst technique | `docs/` |
+| Why something is built this way | `docs/decisions.md` |
+| What happens next, and who owns it | `NEXT.md` |
+| Known gaps, open questions, anything needing a human | a GitHub issue — specific ones where possible, otherwise the inbox issue |
+| What shipped, dated | `changelog.md` |
+| Anything a human needs on arrival | `README.md`, kept short |
+
+Do not accumulate known-gaps lists in the README. That is what issues are
+for.
+
+## Building
+
+```sh
+typst/build.sh              # the 2R essay
+typst/build-examples.sh     # the four style artefacts
+```
+
+Always pass `--font-path fonts` to a bare `typst compile`. Typst falls back
+silently to system fonts otherwise and the same source will produce
+visibly different PDFs on different machines.
+
+Rebuild the affected PDFs and commit them — `output/` is committed so the
+work is viewable without a local toolchain.
+
+## Check the output
+
+Render pages and look at them; do not trust that it compiled.
+
+```sh
+pdftoppm -png -r 80 output/what-is-2r.pdf /tmp/page
+```
+
+`skills/pdf-report/SKILL.md` has the checklist of what usually goes wrong.
+
 ## Changelog
 
 This repo keeps a `changelog.md` (dated entries, newest first). At the end
