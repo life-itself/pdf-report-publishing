@@ -2,3 +2,10 @@ typst/content.typ
 typst/assets/
 pandoc-latex/assets
 typst/build/
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
+.beads/proxieddb/
+*.gate.lock*
