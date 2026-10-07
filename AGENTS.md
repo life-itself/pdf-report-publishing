@@ -20,13 +20,21 @@ one.
 |---|---|
 | Design principles, style specs, Typst technique | `docs/` |
 | Why something is built this way | `docs/decisions.md` |
-| What happens next, and who owns it | `NEXT.md` |
-| Known gaps, open questions, anything needing a human | a GitHub issue — specific ones where possible, otherwise the inbox issue |
+| Work to do, known gaps, anything needing a human | a bead (`bd create`); see `bd ready` |
+| Decisions about the look of SoR papers | the design repo (`projects/sor-design-system/print.md`), not here |
 | What shipped, dated | `changelog.md` |
 | Anything a human needs on arrival | `README.md`, kept short |
 
-Do not accumulate known-gaps lists in the README. That is what issues are
-for.
+Do not accumulate known-gaps or status lists in any Markdown file. That is
+what beads are for.
+
+## Tracking: Beads
+
+Issue prefix `prp`; no GitHub issues. Start a session with `git pull`,
+`bd dolt pull`, `bd ready`. Claim with `bd update ID --claim`, close with
+`bd close ID --reason "..."`. `git push` also pushes Beads through the
+pre-push hook; `bd dolt push` is the manual fallback. Run
+`git config core.hooksPath .beads/hooks` once per clone.
 
 ## Building
 

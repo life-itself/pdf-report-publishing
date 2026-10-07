@@ -6,7 +6,7 @@
 #                     -> output/what-is-2r.pdf
 #   v3                the superseded single-template engine, typst/report.typ
 #                     -> output/what-is-2r-typst.pdf
-#                     Kept until the Essay build is signed off; see NEXT.md.
+#                     Kept until the Essay build is signed off; see bead prp-bf5.
 set -euo pipefail
 cd "$(dirname "$0")"
 

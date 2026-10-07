@@ -1,7 +1,7 @@
 // The full "What is the Second Renaissance?" essay, set in the Essay style.
 //
 // This is the shipping build. `typst/main.typ` is the v3 single-template
-// version and is kept only until this one is signed off — see NEXT.md.
+// version and is kept only until this one is signed off — see bead prp-bf5.
 //
 // Built by `typst/build.sh`, which prepares the Markdown, runs Pandoc, and
 // prepends the right import line to the generated `content.typ` (an

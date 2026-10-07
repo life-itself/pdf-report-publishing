@@ -8,25 +8,17 @@ Tracked in [life-itself/community#1269](https://github.com/life-itself/community
 
 ---
 
-## 👀 Waiting on you
+## Status
 
-**[Issue #3](https://github.com/life-itself/pdf-report-publishing/issues/3)
-— review the three styles and the essay build.** Two verdicts needed:
-which palette is wrong, and does the 2R essay ship in the Essay style.
+The look of Seeds of Renaissance papers is decided in the [design repo](https://github.com/life-itself/design) (`projects/sor-design-system/print.md`); this repo is the pipeline that renders it. Work is tracked in beads: `bd ready`.
 
-Open these:
+Outputs:
 
 | | |
 |---|---|
-| [**style-comparison.pdf**](output/style-comparison.pdf) | The same page in all three styles, 6pp. **Start here.** |
-| [style-review.pdf](output/style-review.pdf) | Review — evidence reports |
-| [style-essay.pdf](output/style-essay.pdf) | Essay — long-form argument |
-| [style-brief.pdf](output/style-brief.pdf) | Brief — policy briefs |
 | [what-is-2r.pdf](output/what-is-2r.pdf) | The 2R essay, 41pp, in the Essay style |
-
-Everything else that needs a human is in
-[NEXT.md](NEXT.md) and the
-[issue list](https://github.com/life-itself/pdf-report-publishing/issues).
+| [style-comparison.pdf](output/style-comparison.pdf) | The same page in all three styles, 6pp |
+| [style-review.pdf](output/style-review.pdf), [style-essay.pdf](output/style-essay.pdf), [style-brief.pdf](output/style-brief.pdf) | One example per style |
 
 ---
 
@@ -60,7 +52,6 @@ the same PDF on any machine.
 | [docs/pipeline.md](docs/pipeline.md) | How Markdown becomes a PDF, and what each recovery pass fixes |
 | [docs/decisions.md](docs/decisions.md) | Why it is built this way — Typst over LaTeX, three styles not one, and the rest |
 | [docs/typst-cookbook.md](docs/typst-cookbook.md) | Typst technique: leading, rails, drop caps, footnotes, counters |
-| [NEXT.md](NEXT.md) | What happens next, and who owns it |
 | [changelog.md](changelog.md) | What happened, dated |
 
 ## Sample document

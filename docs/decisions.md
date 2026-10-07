@@ -9,8 +9,7 @@ decision that was actually made, when, and what it cost — so the next
 person doesn't reopen a settled question without knowing what was already
 weighed.
 
-Not a to-do list. Open questions live in `NEXT.md` and in
-[issues](https://github.com/life-itself/pdf-report-publishing/issues).
+Not a to-do list. Open questions live in beads (`bd list`).
 
 ---
 
@@ -171,5 +170,22 @@ than leaving them plain.
 
 The fix for those is a short interactive pass that records a human's
 classification once — the same sidecar-plus-verification shape as the
-editorial marks. Tracked in
-[#2](https://github.com/life-itself/pdf-report-publishing/issues/2).
+editorial marks. Tracked in bead `prp-bko` (write-up in
+[#2](https://github.com/life-itself/pdf-report-publishing/issues/2)).
+
+## The look comes from the SoR design system; this repo is the pipeline
+
+**2026-10-07.** Seeds of Renaissance papers follow the SoR design system in
+the [design repo](https://github.com/life-itself/design). That repo decides
+the look (spec in `projects/sor-design-system/print.md`, tokens in
+`system/tokens.css`, HTML page mockups in `examples/print/`); this repo
+renders it in Typst as a `sor` style. This replaces the review of the three
+brand-independent palettes (#3) for SoR papers; the three styles stay for
+other documents.
+
+Typst rather than HTML and CSS paged media for the PDF itself: it already
+builds the 2R essay, and it handles footnotes, running heads and long
+documents more reliably. HTML stays the tool for mockups, covers and social
+images.
+
+Tracking moved from GitHub issues to beads (prefix `prp`) at the same time.
