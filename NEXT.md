@@ -1,5 +1,5 @@
 ---
-updated: 2026-08-27
+updated: 2026-10-07
 ---
 
 # Next
@@ -16,7 +16,6 @@ detail lives in its issue.
 
 | | | |
 |---|---|---|
-| [#3](https://github.com/life-itself/pdf-report-publishing/issues/3) | **Review the three styles and the essay build** | Two verdicts: which palette is wrong, and does the 2R essay ship in the Essay style. PDFs linked from the issue. |
 | [#1](https://github.com/life-itself/pdf-report-publishing/issues/1) | **Do the editorial pass** | ~30 min. Proposals sit commented in the sidecar; accepting one is deleting two characters. Nobody else can do this. |
 | [#4](https://github.com/life-itself/pdf-report-publishing/issues/4) | **Decide the licence line** | Policy call. One-line change once decided. |
 
@@ -24,14 +23,8 @@ detail lives in its issue.
 
 | | | |
 |---|---|---|
+| [#6](https://github.com/life-itself/pdf-report-publishing/issues/6) | **SoR style from the design system; build the Wisdom paper** | Ready to start. Say "take #6". |
 | [#2](https://github.com/life-itself/pdf-report-publishing/issues/2) | **Recover the Google Docs conventions** | Ready to start, needs no input. Say "take #2". |
-
-## Blocked
-
-Both wait on [#3](https://github.com/life-itself/pdf-report-publishing/issues/3):
-
-- apply whatever palette changes come out of the review;
-- delete the superseded v3 engine once the Essay build is signed off.
 
 ## Not yet actionable
 
