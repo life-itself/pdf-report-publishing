@@ -15,7 +15,7 @@
 # licensed, not redistributable, so they are not committed: put them in
 # fonts/licensed/ (gitignored) or install them on the machine.
 set -euo pipefail
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+ROOT="$(CDPATH= cd -- "$(dirname "$0")/.." && pwd)"  # CDPATH= : cd would print the path into ROOT
 cd "$ROOT"
 
 NAME="${1:?usage: typst/build-paper.sh <name> [paper-dir]}"

@@ -10,7 +10,7 @@
 # spec and its PDF disagree, one of them is wrong and the PDF is the one
 # that can be checked.
 set -euo pipefail
-cd "$(dirname "$0")/.."
+CDPATH= cd -- "$(dirname "$0")/.."
 
 export PATH="$PATH:$HOME/tools/typst-x86_64-unknown-linux-musl"
 

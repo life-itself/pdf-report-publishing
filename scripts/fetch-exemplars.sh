@@ -6,7 +6,7 @@
 # See reference/exemplars/README.md for what they are and the terms they're
 # held under.
 set -euo pipefail
-cd "$(dirname "$0")/../reference/exemplars"
+CDPATH= cd -- "$(dirname "$0")/../reference/exemplars"
 
 fetch() {
   local out="$1" url="$2"

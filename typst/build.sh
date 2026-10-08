@@ -8,7 +8,7 @@
 #                     -> output/what-is-2r-typst.pdf
 #                     Kept until the Essay build is signed off; see bead prp-bf5.
 set -euo pipefail
-cd "$(dirname "$0")"
+CDPATH= cd -- "$(dirname "$0")"
 
 # Toolchain: typst + pandoc. Prefer whatever is on PATH (Homebrew on macOS);
 # fall back to the ~/tools layout used by the original sandbox.
