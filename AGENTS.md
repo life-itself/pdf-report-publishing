@@ -41,14 +41,19 @@ pre-push hook; `bd dolt push` is the manual fallback. Run
 ```sh
 typst/build.sh              # the 2R essay
 typst/build-examples.sh     # the four style artefacts
+typst/build-paper.sh wisdom # an SoR paper, text from ../2rbook/wisdom
 ```
+
+SoR papers need Polyamine and Restora, which are licensed and never
+committed: see `fonts/README.md`.
 
 Always pass `--font-path fonts` to a bare `typst compile`. Typst falls back
 silently to system fonts otherwise and the same source will produce
 visibly different PDFs on different machines.
 
-Rebuild the affected PDFs and commit them — `output/` is committed so the
-work is viewable without a local toolchain.
+Rebuild the affected PDFs and commit the style artefacts and the 2R essay,
+so the work is viewable without a local toolchain. SoR paper PDFs are not
+committed anywhere: they are published with the paper.
 
 ## Check the output
 

@@ -2,6 +2,19 @@
 
 All notable work on this prototype, dated, most recent first.
 
+## 2026-10-08 — Seeds of Renaissance papers, starting with Wisdom
+
+![Title page, contents, a chapter opening, a body page with a figure, and the back cover of the Wisdom paper in the SoR style](changelog/images/2026-10-08-sor-wisdom.png)
+
+Seeds of Renaissance papers now build in their own style, taken from the SoR
+design system's print mockups and adjusted for a PDF read on screen. The first
+is *Wisdom and Wanting What's Good* (No. 6), 40 pages from cover to back
+cover, built straight from the essay's Markdown and frontmatter: title page,
+imprint with version, annotated contents with page numbers, chapter openings
+with epigraphs and summary boxes, figures cropped to the text edge,
+footnotes, and a night back cover with the summary and both marks. Restora
+is the free sample cuts until the full family is licensed.
+
 ## 2026-08-21 — Repo housekeeping
 
 Adopted the shared changelog convention, and restructured `NEXT.md` around who

@@ -9,3 +9,9 @@ typst/build/
 .beads-credential-key
 .beads/proxieddb/
 *.gate.lock*
+
+# Licensed fonts (Polyamine, Restora): not redistributable, so never committed
+fonts/licensed/
+
+# Paper PDFs are build products; the exemplar copy lives in the design repo
+output/wisdom.pdf

@@ -32,6 +32,11 @@ Ask what the document is *for*:
 A document that wants all three has not decided what it is. Pick the
 dominant mode.
 
+**Seeds of Renaissance papers are the exception:** they always use the
+`sor` style, whose look is set in the design repo (`docs/styles/sor.md`).
+Build with `typst/build-paper.sh <name>`; the paper's Markdown conventions
+are listed in that spec.
+
 Show the user `output/style-comparison.pdf` if they want to choose by
 looking. It renders the same page of content in all three styles, through
 the real templates, with the real page furniture intact.

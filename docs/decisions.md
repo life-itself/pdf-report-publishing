@@ -1,5 +1,5 @@
 ---
-updated: 2026-08-27
+updated: 2026-10-08
 ---
 
 # Design decisions
@@ -189,3 +189,20 @@ documents more reliably. HTML stays the tool for mockups, covers and social
 images.
 
 Tracking moved from GitHub issues to beads (prefix `prp`) at the same time.
+
+## Licensed fonts stay out of the repo; the build reads them locally
+
+**2026-10-08.** The SoR style needs Polyamine and Restora, which are paid
+faces. Their licences cover embedding in our PDFs, not redistribution, and
+both repos are public. So the font files live in `fonts/licensed/`
+(gitignored) or in the machine's installed fonts, and the build is
+reproducible only on a machine that has them. That is a real cost, against
+the "vendor everything" rule in `fonts/README.md`, but the only alternative
+is a private font store, which costs more. The OFL faces (Bricolage, Apfel)
+are vendored as usual.
+
+Bricolage is vendored as static cuts made from the variable font
+(`scripts/make-bricolage.py`), not as the variable font itself. Typst
+doesn't drive the optical-size axis from the text size, and the variable
+font's default instance is the 96pt display cut. The same script makes the
+oblique the body needs, because Bricolage has no italic.

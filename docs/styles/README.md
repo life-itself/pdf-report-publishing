@@ -14,6 +14,7 @@ hex, and a named list of the elements the style supports.
 | [`review.md`](review.md) | Evidence reports, research reviews, state-of-the-field documents | Sober and institutional; a working left rail carries sources and notes |
 | [`essay.md`](essay.md) | Long-form argument, essays, books, thought pieces | Literary and warm; display serif, generous measure, pull quotes |
 | [`brief.md`](brief.md) | Position papers, policy briefs, submissions | Sans-forward and direct; key-message boxes, footnotes, colophon |
+| [`sor.md`](sor.md) | Seeds of Renaissance papers | The SoR design system on paper. Specified in the design repo, not here; the brand-independent rules below do not apply |
 
 All three are:
 
