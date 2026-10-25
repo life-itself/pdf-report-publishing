@@ -13,8 +13,12 @@ loudly where a convention is broken rather than guessing:
   <aside class="section-summary"> ... </aside>
                            summary box (bold in the source, so it still reads
                            as distinct where the class is ignored)
-  *“quote”* + attribution  displayed quotation; the attribution is the next
-                           line ("― Name") or a one-item list ("- Name")
+  > quote                  displayed quotation (the preferred form): a blockquote,
+  >                        whose last paragraph, if it opens with a dash
+  > — Name                 ("— Name"), is the attribution
+  *“quote”* + attribution  the same, as Google Docs exports it: an italic
+                           paragraph; the attribution is the next line
+                           ("― Name") or a one-item list ("- Name")
   first such quotation directly under a chapter heading
                            the chapter's epigraph
   image + "*Fig N: Title. Caption*"
@@ -194,7 +198,24 @@ function Pandoc(doc)
 
   -- Parse a quotation at blocks[idx]; returns quote, attribution, notes, next index.
   local function take_quote(idx)
-    local q, rest = quote_parts(blocks[idx])
+    local b = blocks[idx]
+    if b and b.t == "BlockQuote" then
+      -- "> quote" … "> — Name": the last paragraph is the attribution when it opens with a dash
+      local paras = pandoc.List(b.content)
+      local attr = pandoc.List()
+      local last = paras[#paras]
+      if #paras >= 2 and last.t == "Para" and stringify(last.content):match("^[-–—―]") then
+        attr = strip_dash(last.content)
+        paras:remove(#paras)
+      end
+      local q = pandoc.List()
+      for k, para in ipairs(paras) do
+        if k > 1 then q:insert(pandoc.LineBreak()); q:insert(pandoc.LineBreak()) end
+        for _, x in ipairs(para.content or {}) do q:insert(x) end
+      end
+      return q, attr, pandoc.List(), idx + 1
+    end
+    local q, rest = quote_parts(b)
     if not q then return nil end
     local notes, after = split_notes(rest)
     local attr = strip_dash(after)
