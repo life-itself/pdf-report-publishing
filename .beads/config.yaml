@@ -73,4 +73,4 @@
 
 sync.remote: "git+ssh://git@github.com/life-itself/pdf-report-publishing.git"
 export:
-    auto: true
+    auto: false
