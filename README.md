@@ -10,7 +10,7 @@ Tracked in [life-itself/community#1269](https://github.com/life-itself/community
 
 ## Status
 
-The look of Seeds of Renaissance papers is decided in the [design repo](https://github.com/life-itself/design) (`projects/sor-design-system/print.md`); this repo is the pipeline that renders it. Work is tracked in beads: `bd ready`.
+The look of Seeds of Renaissance papers is decided in the [design repo](https://github.com/life-itself/design) (`sor-design-system/print.md`); this repo is the pipeline that renders it. Work is tracked in beads: `bd ready`.
 
 Outputs:
 

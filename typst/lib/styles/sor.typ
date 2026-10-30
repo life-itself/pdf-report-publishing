@@ -2,7 +2,7 @@
 // docs/styles/sor.md.
 //
 // The look is decided in the design repo, not here: the anatomy and rules
-// in projects/sor-design-system/print.md, the sizes in the --print-* tokens
+// in sor-design-system/print.md, the sizes in the --print-* tokens
 // of system/tokens.css, and the approved page mockups in examples/print/.
 // The values below are copied from those tokens; change them there first.
 //

@@ -177,7 +177,7 @@ editorial marks. Tracked in bead `prp-bko` (write-up in
 
 **2026-10-07.** Seeds of Renaissance papers follow the SoR design system in
 the [design repo](https://github.com/life-itself/design). That repo decides
-the look (spec in `projects/sor-design-system/print.md`, tokens in
+the look (spec in `sor-design-system/print.md`, tokens in
 `system/tokens.css`, HTML page mockups in `examples/print/`); this repo
 renders it in Typst as a `sor` style. This replaces the review of the three
 brand-independent palettes (#3) for SoR papers; the three styles stay for

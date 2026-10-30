@@ -21,7 +21,7 @@ one.
 | Design principles, style specs, Typst technique | `docs/` |
 | Why something is built this way | `docs/decisions.md` |
 | Work to do, known gaps, anything needing a human | a bead (`bd create`); see `bd ready` |
-| Decisions about the look of SoR papers | the design repo (`projects/sor-design-system/print.md`), not here |
+| Decisions about the look of SoR papers | the design repo (`sor-design-system/print.md`), not here |
 | What shipped, dated | `changelog.md` |
 | Anything a human needs on arrival | `README.md`, kept short |
 

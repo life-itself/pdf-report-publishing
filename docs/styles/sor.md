@@ -1,7 +1,7 @@
 ---
 style: sor
 updated: 2026-10-08
-derived-from: the SoR design system (life-itself/design, projects/sor-design-system/)
+derived-from: the SoR design system (life-itself/design, sor-design-system/)
 ---
 
 # Style: SoR (Seeds of Renaissance papers)
@@ -14,7 +14,7 @@ is decided in the design repo and this repo renders it (see
 `docs/decisions.md`, "The look comes from the SoR design system"). The
 spec is:
 
-| What | Where (design repo, `projects/sor-design-system/`) |
+| What | Where (design repo, `sor-design-system/`) |
 |---|---|
 | Page sequence, recto starts, running heads, numbering | `print.md`, "Anatomy of a paper" |
 | One white PDF for screen, links, covers in the file | `print.md`, "One PDF, for reading on screen" |
