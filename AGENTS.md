@@ -41,7 +41,7 @@ pre-push hook; `bd dolt push` is the manual fallback. Run
 ```sh
 typst/build.sh              # the 2R essay
 typst/build-examples.sh     # the four style artefacts
-typst/build-paper.sh wisdom # an SoR paper, text from ../2rbook/wisdom
+typst/build-paper.sh wisdom # an SoR paper, text from ../papers/wisdom
 ```
 
 SoR papers need Polyamine and Restora, which are licensed and never

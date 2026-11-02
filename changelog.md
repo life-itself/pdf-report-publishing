@@ -114,7 +114,7 @@ high-class.
 
 First working pass at the Markdown → PDF pipeline
 ([life-itself/community#1269](https://github.com/life-itself/community/issues/1269)),
-using the ["What is 2R?"](https://github.com/life-itself/2rbook/blob/main/what-is-2r/essay.md)
+using the ["What is 2R?"](https://github.com/life-itself/papers/blob/main/what-is-2r/essay.md)
 essay as a real test document.
 
 ![Cover](changelog/images/2026-08-15-cover.png)

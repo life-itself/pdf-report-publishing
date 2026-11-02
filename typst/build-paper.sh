@@ -4,7 +4,7 @@
 # Usage:  typst/build-paper.sh wisdom [path/to/paper-dir]
 #
 # The paper's text lives in its own repo (default for wisdom:
-# ../2rbook/wisdom, holding essay.md and assets/). This script:
+# ../papers/wisdom, holding essay.md and assets/). This script:
 #
 #   1. copies the paper's assets into typst/build/paper/
 #   2. writes the essay's frontmatter to typst/build/paper/meta.yaml
@@ -20,7 +20,7 @@ cd "$ROOT"
 
 NAME="${1:?usage: typst/build-paper.sh <name> [paper-dir]}"
 case "$NAME" in
-  wisdom) DEFAULT_SRC="../2rbook/wisdom" ;;
+  wisdom) DEFAULT_SRC="../papers/wisdom" ;;
   *) DEFAULT_SRC="" ;;
 esac
 SRC="${2:-$DEFAULT_SRC}"

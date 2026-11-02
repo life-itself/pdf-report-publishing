@@ -56,7 +56,7 @@ the same PDF on any machine.
 
 ## Sample document
 
-[`life-itself/2rbook`](https://github.com/life-itself/2rbook)'s
+[`life-itself/papers`](https://github.com/life-itself/papers)'s
 "What is the Second Renaissance?" essay — ~8,900 words, 12 sections plus an
 appendix. Chosen because it is short-ish, representative, and usefully
 messy: a real Google Docs export, complete with escaped punctuation, a

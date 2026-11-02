@@ -1,7 +1,7 @@
 // Seeds of Renaissance No. 6: Wisdom and Wanting What's Good.
 //
 // Built by `typst/build-paper.sh wisdom`, which reads the text from the
-// 2rbook repo (wisdom/essay.md), converts it with scripts/sor.lua and puts
+// papers repo (wisdom/essay.md), converts it with scripts/sor.lua and puts
 // the result, the frontmatter and the figures in typst/build/paper/.
 //
 // Everything written comes from the essay's frontmatter: title-page fields
